@@ -1,0 +1,23 @@
+/* 
+    Document   : style
+    Created on : Oct 25, 2013, 10:10:14 AM
+    Author     : kelvin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+body{
+    background: none repeat scroll 0 0 #eeeeee;
+    margin-right: 0;
+    padding-bottom: 25px;
+    position: relative;
+    min-height: 500px;
+    width: auto;
+    -webkit-background-clip: padding-box;
+    border-top-left-radius: 8px;
+}
+
+
