@@ -5,7 +5,7 @@
 $(document).ready(function(){
     $("#patientmenu").click(function(){
        
-        $("#sidebar").html("<i class='fa fa-spinner fa-spin fa-lg'></i> Loading Menu..");
+        $("#sidebar").html("<img src='img/loading.gif' /> Loading Menu..");
         $("#sidebar").load("includes/menus.php?page=patient",function(){
             $("#sidebar ul li").click(function(){
                 $("#sidebar ul li").removeClass("active");
@@ -17,12 +17,53 @@ $(document).ready(function(){
          ///////////////////////////////////////////////////////
          $("#registerpatient").click(function(){
              $("#submenus").html("");
-             $("#maincontents").html("<i class='fa fa-spinner fa-spin fa-lg'></i> Loading form...");
+             $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
              $("#maincontents").load("includes/forms.php?page=userRegistration",function(){
                  
              });
          });
      
+         ///////////////////////////////////////////////////////
+         ////////////Patient Diagnosis /////////////////////////
+         ///////////////////////////////////////////////////////
+         $("#patiDiagnosis").click(function(){
+             $("#submenus").html("");
+             $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
+             $("#maincontents").load("includes/forms.php?page=patDiagnosis",function(){
+                 
+             });
+         });
+     
+        ///////////////////////////////////////////////////////
+         ////////////Patient examination //////////////////////
+         ///////////////////////////////////////////////////////
+         $("#patiexamination").click(function(){
+             $("#submenus").html("");
+             $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
+             $("#maincontents").load("includes/forms.php?page=Examination",function(){
+                 
+             });
+         });
+     
+        ///////////////////////////////////////////////////////
+         ////////////Patient followup //////////////////////
+         ///////////////////////////////////////////////////////
+         $("#followup").click(function(){
+             $("#submenus").html("");
+             $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
+             $("#maincontents").load("includes/forms.php?page=follow_up",function(){
+                 
+             });
+         });
+     
+         ///////////////////////////////////////////////////////
+         //////////////////////Encounter //////////////////////
+         ///////////////////////////////////////////////////////
+         $("#encounter").click(function(){
+             $("#submenus").html("");
+             $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
+             
+         });
          $("#registerpatient").trigger("click");
         });
       

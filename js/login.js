@@ -12,7 +12,9 @@ $(document).ready(function(){
                 err += ' '+data;
                 err += '</div>';
                 if(data !== "success"){
-                    //$("h3.headd").html(err);
+                    $("h3.headd").html(err);
+                }else{
+                   window.location.assign("user.php");
                 }
             });
         }

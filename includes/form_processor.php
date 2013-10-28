@@ -1,5 +1,5 @@
 <?php
-include '../includes/connection.php';
+include_once '../includes/connection.php';
 function __autoload($class_name) {
     include_once '../class/'. $class_name . '.php';
 }

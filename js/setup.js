@@ -6,7 +6,7 @@ $(document).ready(function(){
     $("#setupmenu").click(function(){
         
         
-        $("#sidebar").html("<i class='fa fa-spinner fa-spin fa-lg'></i> Loading Menu..");
+       $("#sidebar").html("<img src='img/loading.gif' /> Loading Menu..");
        $("#sidebar").load("includes/menus.php?page=setup",function(){
            $("#sidebar ul li").click(function(){
                 $("#sidebar ul li").removeClass("active");
@@ -18,6 +18,19 @@ $(document).ready(function(){
             $("#usermanagement").click(function(){
                  $("#submenus").load("includes/menus.php?page=User_Management",function(){
                     activateLinks();
+                    $("#addUser").click(function(){
+                        $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
+                        $("#maincontents").load("includes/forms.php?page=addUser",function(){
+                 
+                        });
+                    });
+                
+                    $("#searchuser").click(function(){
+                        $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
+                        $("#maincontents").load("includes/forms.php?page=SearchUser",function(){
+                 
+                        });
+                    });
                  });           
             });
           
