@@ -8,16 +8,16 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand text-primary" href="#">POPULATION CANCER REGISTRY</a>
+    <a class="navbar-brand text-primary" href="#"><b>POPULATION CANCER REGISTRY</b></a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
-        <li class="active"><a href="#" class="btn btn-default" id="patientmenu"><i class="fa fa-wheelchair fa-2x"></i> <b>Patient </b></a></li>
-      <li style="padding-left: 35px;"><a href="#" class="btn btn-default" id="reportmenu"><i class="fa fa-bar-chart-o fa-2x"></i> <b>Report </b></a></li>
-      <li style="padding-left: 35px;"><a href="#" class="btn btn-default" id="setupmenu"><i class="fa fa-cogs fa-2x"></i><b> Setup </b></a></li>
-      <li style="padding-left: 35px;"><a href="#" class="btn btn-default" id="extramenu"><i class="fa fa-ambulance fa-2x"></i><b> Extra </b></a></li>
+      <li class="active"><a href="#" class="btn btn-default" id="patientmenu"><i class="fa fa-wheelchair fa-lg"></i> <b>Patient </b></a></li>
+      <li style="padding-left: 35px;"><a href="#" class="btn btn-default" id="reportmenu"><i class="fa fa-bar-chart-o fa-lg"></i> <b>Report </b></a></li>
+      <li style="padding-left: 35px;"><a href="#" class="btn btn-default" id="setupmenu"><i class="fa fa-cogs fa-lg"></i><b> Setup </b></a></li>
+      <li style="padding-left: 35px;"><a href="#" class="btn btn-default" id="extramenu"><i class="fa fa-ambulance fa-lg"></i><b> Extra </b></a></li>
     </ul>
     
     <ul class="nav navbar-nav navbar-right">

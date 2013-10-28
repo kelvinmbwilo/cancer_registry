@@ -33,6 +33,7 @@
         <script type="text/javascript" src="js/jquery.validationEngine-en.js"></script> 
         <script type="text/javascript" src="js/jquery.validationEngine.js"></script>
         <script type="text/javascript" src="js/jquery.form.js"></script>
+        <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script> 
         <script type="text/javascript" src="js/login.js"></script>
         <script type="text/javascript" src="js/patient.js"></script>
         <script type="text/javascript" src="js/report.js"></script>

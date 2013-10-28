@@ -24,11 +24,13 @@ $(document).ready(function(){
                  
                         });
                     });
-                
+                    
+                    $("#addUser").trigger("click");
+                    
                     $("#searchuser").click(function(){
                         $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
                         $("#maincontents").load("includes/forms.php?page=SearchUser",function(){
-                 
+                           $("#myTable").tablesorter();
                         });
                     });
                  });           
