@@ -136,7 +136,7 @@ if(isset($_GET['page'])){
   <div class="form-group">
     <label for="Date_Of_Incidence" class="col-md-2 control-label">Date Of Incidence</label>
     <div class="col-md-4">
-      <input type="Date_Of_Incidence" name="Date_Of_Incidence" id="Patient_id" class="form-control validate[required]" placeholder="Date Of Incidence">
+      <input type="Date_Of_Incidence" name="Date_Of_Incidence" id="Date_Of_Incidence" class="form-control validate[required]" placeholder="Date Of Incidence">
     </div>
   </div>
     
@@ -393,6 +393,83 @@ if(isset($_GET['page'])){
        <?php
     }
     
+    
+    ///////////////////////////////////////////////////////////
+    //////////// add lo /////////////////////////////
+    //////////////////////////////////////////////////////////
+    if($_GET['page'] == "Edit_User"){
+        ?>
+<h3 class="text-center">Edit User</h3>
+<hr/>
+<form class="form-horizontal" role="form">
+     <!--First Name-->
+  <div class="form-group">
+    <label for="First_Name" class="col-md-2 control-label">First Name</label>
+    <div class="col-md-4">
+      <input type="text" name="First_Name" id="First_Name" class="form-control validate[required]"  value="First Name">
+    </div>
+  </div>
+ 
+  <!--Middle Name-->
+  <div class="form-group">
+    <label for="Middle_Name" class="col-md-2 control-label">Middle Name</label>
+    <div class="col-md-4">
+      <input type="text" name="Middle_Name" id="Middle_Name" class="form-control validate[required]"  value="Middle Name">
+    </div>
+  </div>
+    
+   <!--Last Name-->
+   <div class="form-group">
+    <label for="Last_Name" class="col-md-2 control-label">Last Name</label>
+    <div class="col-md-4">
+      <input type="text" name="Last_Name" id="Last_Name" class="form-control validate[required]"  value="Last Name">
+    </div>
+  </div>
+   
+  <!--Sex-->
+ <div class="form-group">
+    <label for="Sex" class="col-md-2 control-label">Sex</label>
+    <div class="col-md-4">
+      <!--<input type="text" name="Sex" id="Sex" class="form-control validate[required]"  value="Sex">-->
+      <?php echo form::genderDropdown(""); ?>
+    </div>
+  </div>
+ 
+ <!--Role-->
+ <div class="form-group">
+    <label for="Role" class="col-md-2 control-label">Role</label>
+    <div class="col-md-4">
+      <!--<input type="text" name="Occupation" id="Occupation" class="form-control validate[required]"  value="Occupation">-->
+      <?php echo form::categoryDropdown("Role"); ?>
+    </div>
+  </div>
+  <!--Email-->
+  <div class="form-group">
+    <label for="Email" class="col-md-2 control-label" >Email</label>
+    <div class="col-md-4">
+      <input type="text" name="Email" id="Email" class="form-control validate[required]"  value="Email">
+    </div>
+  </div>
+ 
+  <!--Phone Number-->
+  <div class="form-group">
+    <label for="Phone_Number" class="col-md-2 control-label">Phone Number</label>
+    <div class="col-md-4">
+      <input type="text" name="Phone_Number" id="Phone_Number" class="form-control validate[required]"  value="Phone Number">
+    </div>
+  </div>
+    
+   <div class="form-group">
+    <div class="col-md-offset-2 col-md-8 pull-right">
+        <button type="reset" class="btn btn-warning" id="loginbtn">Cancel</button>
+        <button type="button" class="btn btn-info" id="loginbtn">Submit</button>
+    </div>
+  </div>
+    <h3 id="output" ></h3>
+</form>
+       <?php
+    }
+    
     ///////////////////////////////////////////////////////////
     /////////////////Search User /////////////////////////////
     //////////////////////////////////////////////////////////
@@ -490,11 +567,392 @@ if(isset($_GET['page'])){
 </tbody> 
 </table> 
 <div class="row">
-    <div class="col-md-2 btn btn-default"><i class="fa fa-pencil"></i> Edit User</div>
-    <div class="col-md-2 btn btn-default"><i class="fa fa-trash-o"></i> Remove User</div>
-    <div class="col-md-2 btn btn-default">Done</div>
+    <div class="col-md-2 btn btn-warning" id="edit_user"><i class="fa fa-pencil"></i> Edit User</div>
+    <div class="col-md-2 btn btn-danger"><i class="fa fa-trash-o"></i> Remove User</div>
+    <div class="col-md-2 btn btn-primary">Done</div>
 </div>
        <?php
     }
+
+    
+   ///////////////////////////////////////////////////////////
+    ////////////Add Location /////////////////////////////////
+    //////////////////////////////////////////////////////////
+    if($_GET['page'] == "addLocation"){
+        ?>
+<h3 class="text-center">Add Location</h3>
+<hr/>
+<form class="form-horizontal" role="form">
+     <!--First Name-->
+  <div class="form-group">
+    <label for="Name" class="col-md-2 control-label">Name</label>
+    <div class="col-md-4">
+      <input type="text" name="Name" id="Name" class="form-control validate[required]"  placeholder="Name">
+    </div>
+  </div>
+ 
+  <!--Middle Name-->
+  <div class="form-group">
+    <label for="Middle_Name" class="col-md-2 control-label">Level</label>
+    <div class="col-md-4">
+      <!--<input type="text" name="Middle_Name" id="Middle_Name" class="form-control validate[required]"  placeholder="Middle Name">-->
+      <?php echo form::generalDropdown("","Level"); ?>
+    </div>
+  </div>
+    
+   <!--Last Name-->
+   <div class="form-group">
+    <label for="Code" class="col-md-2 control-label">Code</label>
+    <div class="col-md-4">
+      <input type="text" name="Code" id="Code" class="form-control validate[required]"  placeholder="Code">
+    </div>
+  </div>
+   
+  <!--Sex-->
+ <div class="form-group">
+    <label for="Parent Node" class="col-md-2 control-label">Parent Node</label>
+    <div class="col-md-4">
+      <!--<input type="text" name="Sex" id="Sex" class="form-control validate[required]"  placeholder="Sex">-->
+      <?php echo form::generalDropdown("","Parent Node"); ?>
+    </div>
+  </div>
+ 
+ 
+    
+   <div class="form-group">
+    <div class="col-md-offset-2 col-md-8 ">
+        <button type="reset" class="btn btn-warning" id="loginbtn">Clear</button>
+        <button type="button" class="btn btn-info" id="loginbtn">Cancel</button>
+        <button type="button" class="btn btn-success" id="loginbtn">Submit</button>
+    </div>
+  </div>
+    <h3 id="output" ></h3>
+</form>
+       <?php
+    }
+    
+    ///////////////////////////////////////////////////////////
+    /////////////////Search Location /////////////////////////////
+    //////////////////////////////////////////////////////////
+    if($_GET['page'] == "SearchLocation"){
+        ?>
+<h4>Please Specify The Following Details</h4>
+<form class="form-horizontal" role="form">
+     <!--First Name-->
+  <div class="form-group">
+    <label for="First_Name" class="col-md-2 control-label">Name</label>
+    <div class="col-md-4">
+      <input type="text" name="First_Name" id="First_Name" class="form-control validate[required]"  placeholder="Name">
+    </div>
+  </div>
+ 
+  
+  <!--Filter -->
+ <div class="form-group">
+    <label for="Sex" class="col-md-2 control-label">Add Filter</label>
+    <div class="col-md-4">
+      <!--<input type="text" name="Sex" id="Sex" class="form-control validate[required]"  placeholder="Sex">-->
+        <?php echo form::generalDropdown("","Level"); ?>
+    </div>
+    <div class="col-md-4">
+      <!--<input type="text" name="Sex" id="Sex" class="form-control validate[required]"  placeholder="Sex">-->
+      <?php echo form::generalDropdown("","Ward"); ?>
+    </div>
+  </div>
+ 
+   <div class="form-group">
+    <div class="col-md-offset-2 col-md-8 pull-right">
+        <button type="reset" class="btn btn-warning" id="loginbtn">Clear</button>
+        <button type="button" class="btn btn-info" id="loginbtn">Cancel</button>
+        <button type="reset" class="btn btn-success" id="loginbtn">Search</button>
+    </div>
+  </div>
+    <h3 id="output" ></h3>
+</form>
+
+<h3>Search Results</h3>
+<table id="myTable" class="tablesorter"> 
+<thead> 
+<tr> 
+    <th>Location Level</th>
+    <th>Name</th>
+    <th>Code</th> 
+    <th>Node</th> 
+     
+</tr> 
+</thead> 
+<tbody> 
+<tr> 
+    <td>District</td> 
+    <td>John</td> 
+    <td>jsmith@gmail.com</td> 
+    <td>$50.00</td> 
+</tr> 
+<tr> 
+    <td>Ward</td> 
+    <td>Frank</td> 
+    <td>fbach@yahoo.com</td> 
+    <td>$50.00</td> 
+</tr> 
+<tr> 
+    <td>Village</td> 
+    <td>Jason</td> 
+    <td>jdoe@hotmail.com</td> 
+    <td>$100.00</td> 
+</tr> 
+<tr> 
+    <td>Village</td> 
+    <td>Tim</td> 
+    <td>tconway@earthlink.net</td> 
+    <td>$50.00</td> 
+</tr> 
+</tbody> 
+</table> 
+<ul class="pagination">
+  <li><a href="#">&laquo;</a></li>
+  <li><a href="#">1</a></li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#">&raquo;</a></li>
+</ul>
+<div class="row">
+    <div class="col-md-2 btn btn-warning" id="edit_user"><i class="fa fa-pencil"></i> Edit Location</div>
+    <div class="col-md-2 btn btn-danger"><i class="fa fa-trash-o"></i> Remove Location</div>
+</div>
+       <?php
+    }
+
+    
+    ///////////////////////////////////////////////////////////
+    ////////////Edit Location /////////////////////////////////
+    //////////////////////////////////////////////////////////
+    if($_GET['page'] == "Edit_Location"){
+        ?>
+<h3 class="text-center">Edit Locationn</h3>
+<hr/>
+<form class="form-horizontal" role="form">
+     <!--First Name-->
+  <div class="form-group">
+    <label for="Name" class="col-md-2 control-label">Name</label>
+    <div class="col-md-4">
+      <input type="text" name="Name" id="Name" class="form-control validate[required]"  value="Name">
+    </div>
+  </div>
+ 
+  <!--Middle Name-->
+  <div class="form-group">
+    <label for="Middle_Name" class="col-md-2 control-label">Level</label>
+    <div class="col-md-4">
+      <!--<input type="text" name="Middle_Name" id="Middle_Name" class="form-control validate[required]"  value="Middle Name">-->
+      <?php echo form::generalDropdown("","Level"); ?>
+    </div>
+  </div>
+    
+   <!--Last Name-->
+   <div class="form-group">
+    <label for="Code" class="col-md-2 control-label">Code</label>
+    <div class="col-md-4">
+      <input type="text" name="Code" id="Code" class="form-control validate[required]"  value="Code">
+    </div>
+  </div>
+   
+  <!--Sex-->
+ <div class="form-group">
+    <label for="Parent Node" class="col-md-2 control-label">Parent Node</label>
+    <div class="col-md-4">
+      <!--<input type="text" name="Sex" id="Sex" class="form-control validate[required]"  placeholder="Sex">-->
+      <?php echo form::generalDropdown("","Parent Node"); ?>
+    </div>
+  </div>
+ 
+ 
+    
+   <div class="form-group">
+    <div class="col-md-offset-2 col-md-8 ">
+        <button type="button" class="btn btn-info" id="loginbtn">Cancel</button>
+        <button type="button" class="btn btn-success" id="loginbtn">Submit</button>
+    </div>
+  </div>
+    <h3 id="output" ></h3>
+</form>
+       <?php
+    }
+    
+    ///////////////////////////////////////////////////////////
+    ////////////Add Occupation /////////////////////////////////
+    //////////////////////////////////////////////////////////
+    if($_GET['page'] == "addOccupation"){
+        ?>
+<h3 class="text-center">Add Occupation</h3>
+<hr/>
+<form class="form-horizontal" role="form">
+     <!--First Name-->
+  <div class="form-group">
+    <label for="Name" class="col-md-2 control-label">Occupation Name</label>
+    <div class="col-md-4">
+      <input type="text" name="Name" id="Name" class="form-control validate[required]"  placeholder="Occupation Name">
+    </div>
+  </div>
+     
+   <div class="form-group">
+    <div class="col-md-offset-2 col-md-8 ">
+        <button type="button" class="btn btn-success" id="loginbtn">Add</button>
+    </div>
+  </div>
+    <h3 id="output" ></h3>
+</form>
+       <?php
+    }
+    
+    ///////////////////////////////////////////////////////////
+    /////////////////Search Occupation /////////////////////////////
+    //////////////////////////////////////////////////////////
+    if($_GET['page'] == "SearchOccupation"){
+        ?>
+<h4>Please Specify The Following Details</h4>
+<form class="form-horizontal" role="form">
+     <!--First Name-->
+  <div class="form-group">
+    <label for="First_Name" class="col-md-2 control-label">Name</label>
+    <div class="col-md-4">
+      <input type="text" name="First_Name" id="First_Name" class="form-control validate[required]"  placeholder="Name">
+      <button type="reset" class="btn btn-success" id="loginbtn">Search</button>
+    </div>
+  </div>
+ 
+  
+
+<table id="myTable" class="tablesorter"> 
+<thead> 
+<tr> 
+    <th>#No</th>
+    <th>Occupation Name</th> 
+     
+</tr> 
+</thead> 
+<tbody> 
+<tr> 
+    <td>1</td> 
+    <td>John</td> 
+</tr> 
+<tr> 
+    <td>2</td> 
+    <td>Frank</td> 
+</tr> 
+<tr> 
+    <td>3</td> 
+    <td>Jason</td> 
+<tr> 
+    <td>4</td> 
+    <td>Tim</td> 
+</tr> 
+</tbody> 
+</table> 
+<ul class="pagination">
+  <li><a href="#">&laquo;</a></li>
+  <li><a href="#">1</a></li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#">&raquo;</a></li>
+</ul>
+<div class="row">
+    <div class="col-md-1 btn btn-warning" id="edit_user"><i class="fa fa-pencil"></i> Edit</div>
+    <div class="col-md-1 btn btn-danger"><i class="fa fa-trash-o"></i> Remove</div>
+</div>
+       <?php
+    }
+    
+    ///////////////////////////////////////////////////////////
+    ////////////Add Report /////////////////////////////////
+    //////////////////////////////////////////////////////////
+    if($_GET['page'] == "addReport"){
+        ?>
+<h3 class="text-center">Add Report</h3>
+<hr/>
+<form class="form-horizontal" role="form">
+     <!--First Name-->
+  <div class="form-group">
+    <label for="Name" class="col-md-2 control-label">Type Identifier</label>
+    <div class="col-md-4">
+      <input type="text" name="Name" id="Name" class="form-control validate[required]"  placeholder="Report Type Identifier">
+    </div>
+  </div>
+     
+   <div class="form-group">
+    <div class="col-md-offset-2 col-md-8 ">
+        <button type="button" class="btn btn-success" id="loginbtn">Add</button>
+    </div>
+  </div>
+    <h3 id="output" ></h3>
+</form>
+       <?php
+    }
+    
+    ///////////////////////////////////////////////////////////
+    /////////////////Search Occupation /////////////////////////////
+    //////////////////////////////////////////////////////////
+    if($_GET['page'] == "SearchReport"){
+        ?>
+<h4>Please Specify The Following Details</h4>
+<form class="form-horizontal" role="form">
+     <!--First Name-->
+  <div class="form-group">
+    <label for="First_Name" class="col-md-2 control-label">Report Type</label>
+    <div class="col-md-4">
+      <input type="text" name="First_Name" id="First_Name" class="form-control validate[required]"  placeholder="Report Type">
+      <button type="reset" class="btn btn-success" id="loginbtn">Search</button>
+    </div>
+  </div>
+ 
+  
+
+<table id="myTable" class="tablesorter"> 
+<thead> 
+<tr> 
+    <th>#No</th>
+    <th>Report Type</th> 
+     
+</tr> 
+</thead> 
+<tbody> 
+<tr> 
+    <td>1</td> 
+    <td>John</td> 
+</tr> 
+<tr> 
+    <td>2</td> 
+    <td>Frank</td> 
+</tr> 
+<tr> 
+    <td>3</td> 
+    <td>Jason</td> 
+<tr> 
+    <td>4</td> 
+    <td>Tim</td> 
+</tr> 
+</tbody> 
+</table> 
+<ul class="pagination">
+  <li><a href="#">&laquo;</a></li>
+  <li><a href="#">1</a></li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#">&raquo;</a></li>
+</ul>
+<div class="row">
+    <div class="col-md-1 btn btn-warning" id="edit_user"><i class="fa fa-pencil"></i> Edit</div>
+    <div class="col-md-1 btn btn-danger"><i class="fa fa-trash-o"></i> Remove</div>
+</div>
+       <?php
+    }
+    
 }
+
+
 ?>

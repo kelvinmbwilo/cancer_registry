@@ -37,7 +37,7 @@ if(isset($_GET['page'])){
         ?>
         <ul class="nav nav-tabs">
             <li class="active" id="addUser"><a href="#"><i class="fa fa-plus-circle fa-lg"></i> Add User</a></li>
-            <li><a href="#"><i class="fa fa-list fa-lg"></i> List User</a></li>
+            <li><a href="#" id="listuser"><i class="fa fa-list fa-lg"></i> List User</a></li>
             <li><a href="#" id="searchuser"><i class="fa fa-search fa-lg"></i> Search User</a></li>
           </ul>
     <?php
@@ -46,9 +46,9 @@ if(isset($_GET['page'])){
     if($_GET['page'] == "Manage_Location"){
         ?>
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#"><i class="fa fa-plus-circle fa-lg"></i> Add Location</a></li>
-            <li><a href="#"><i class="fa fa-list fa-lg"></i> List Location</a></li>
-            <li><a href="#"><i class="fa fa-search fa-lg"></i> Search Location</a></li>
+            <li class="active" id="addLocation"><a href="#"><i class="fa fa-plus-circle fa-lg"></i> Add Location</a></li>
+            <li><a href="#" id="listLocation"><i class="fa fa-list fa-lg"></i> List Location</a></li>
+            <li><a href="#" id="searchlocation"><i class="fa fa-search fa-lg"></i> Search Location</a></li>
           </ul>
     <?php
     }
@@ -56,9 +56,9 @@ if(isset($_GET['page'])){
     if($_GET['page'] == "Manage_Occupation"){
         ?>
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#"><i class="fa fa-plus-circle fa-lg"></i> Add Occupation</a></li>
-            <li><a href="#"><i class="fa fa-list fa-lg"></i> List Occupation</a></li>
-            <li><a href="#"><i class="fa fa-search fa-lg"></i> Search Occupation</a></li>
+            <li class="active" id="addOccupation"><a href="#"><i class="fa fa-plus-circle fa-lg"></i> Add Occupation</a></li>
+            <li><a href="#" id="listOccupation"><i class="fa fa-list fa-lg"></i> List Occupation</a></li>
+            <li><a href="#" id="searchOccupation"><i class="fa fa-search fa-lg"></i> Search Occupation</a></li>
           </ul>
     <?php
     }
@@ -66,9 +66,9 @@ if(isset($_GET['page'])){
     if($_GET['page'] == "Report_Type"){
         ?>
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#"><i class="fa fa-plus-circle fa-lg"></i>Add Report Type</a></li>
-            <li><a href="#"><i class="fa fa-list fa-lg"></i>List Report Type</a></li>
-            <li><a href="#"><i class="fa fa-search fa-lg"></i>Search Report Type</a></li>
+            <li class="active" id="addReport"><a href="#"><i class="fa fa-plus-circle fa-lg"></i> Add Report Type</a></li>
+            <li><a href="#" id="listReport"><i class="fa fa-list fa-lg"></i> List Report Type</a></li>
+            <li><a href="#" id="searchReport"><i class="fa fa-search fa-lg"></i> Search Report Type</a></li>
           </ul>
     <?php
     }
@@ -78,7 +78,7 @@ if(isset($_GET['page'])){
     if($_GET['page'] == "report"){
         ?>
         <ul class="nav nav-tabs nav-stacked">
-            <li class="active"><a href="#"><i class="fa fa-group fa-lg"></i> View Community Report <i class="fa fa-chevron-right pull-right"></i></a></li>
+            <li class="active" id="communityReport"><a href="#" ><i class="fa fa-group fa-lg"></i> View Community Report <i class="fa fa-chevron-right pull-right"></i></a></li>
             <li><a href="#"><i class="fa fa-file-text fa-lg"></i> View Normal Report <i class="fa fa-chevron-right pull-right"></i></a></li>
 <!--            <li><a href="#"><i class="fa fa-home fa-lg"></i> Manage Occupation <i class="fa fa-chevron-right pull-right"></i></a></li>
             <li><a href="#"><i class="fa fa-file-text fa-lg"></i> Report Type <i class="fa fa-chevron-right pull-right"></i></a></li>-->

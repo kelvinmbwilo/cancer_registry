@@ -126,7 +126,7 @@ class form {
     }
     
     static function generalDropdown($name,$default){
-        $str = "<select name='$name' class='form-control'>";
+        $str = "<select name='$name' class='form-control'echo >";
         $str .= "<option disabled='disabled' selected='selected'>$default</option>";
         $str .= "<option>Option1</option><option>Option2</option><option>Option3</option><option>Option4</option><option>Option5</option>";
         $str .= "</select>";

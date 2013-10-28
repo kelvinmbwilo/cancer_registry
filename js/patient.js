@@ -30,7 +30,11 @@ $(document).ready(function(){
              $("#submenus").html("");
              $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
              $("#maincontents").load("includes/forms.php?page=patDiagnosis",function(){
-                 
+                 $("#Date_Of_Incidence").datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat:"yy-mm-dd"
+                });
              });
          });
      
