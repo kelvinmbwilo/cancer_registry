@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css" />
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css" />
         <link rel="stylesheet" href="jqueryui/css/start/jquery-ui-1.10.3.custom.min.css" type="text/css" />
@@ -20,9 +20,15 @@
             </div>
             
             <div class="col-md-9" >
-                <div class="row" id="submenus">dsafasf</div>
+                <div class="row" id="submenus">
+                    
+                </div>
                 
-                <div class="row" id="maincontents">fdsafdsaf</div>
+                <div class="row" id="maincontents"></div>
+                <div class="row" id="">
+                    <button type="button" class="btn btn-info col-md-offset-2" id="submit">Submit</button>
+                    <button type="button" class="btn btn-default" id="submit1">Submit And Add Another</button>
+                </div>
             </div>
         </div>
         <!--putting script bellow so that page load slow-->

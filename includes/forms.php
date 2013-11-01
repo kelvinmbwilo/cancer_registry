@@ -10,9 +10,8 @@ function __autoload($class_name) {
 if(isset($_GET['page'])){
     if($_GET['page'] == "userRegistration"){
         ?>
-<h3 class="text-center">Patient Registration</h3>
-<hr/>
 <form class="form-horizontal" role="form">
+    <legend>Patient Registration</legend>
   <!--Patient_id-->
   <div class="form-group">
     <label for="Patient_id" class="col-md-2 control-label">Patient_id</label>
@@ -45,6 +44,14 @@ if(isset($_GET['page'])){
     </div>
   </div>
    
+   <!--Last Name-->
+   <div class="form-group">
+    <label for="Birth_Date" class="col-md-2 control-label">Birth Date</label>
+    <div class="col-md-4">
+      <input type="text" name="Birth_Date" id="Birth_Date" class="form-control validate[required]"  placeholder="Birth Date">
+    </div>
+  </div>
+   
  <!--Sex-->
  <div class="form-group">
     <label for="Sex" class="col-md-2 control-label">Sex</label>
@@ -59,7 +66,7 @@ if(isset($_GET['page'])){
     <label for="Occupation" class="col-md-2 control-label">Occupation</label>
     <div class="col-md-4">
       <!--<input type="text" name="Occupation" id="Occupation" class="form-control validate[required]"  placeholder="Occupation">-->
-      <?php echo form::categoryDropdown("Occupation"); ?>
+      <?php echo form::categoryDropdown("Occupation",""); ?>
     </div>
   </div>
  
@@ -105,11 +112,9 @@ if(isset($_GET['page'])){
   </div>
    <div class="form-group">
     <div class="col-md-offset-2 col-md-10 pull-right">
-        <button type="reset" class="btn btn-warning" id="loginbtn">Reset</button>
-        <button type="button" class="btn btn-info" id="loginbtn">Register</button>
+        <!--<button type="reset" class="btn btn-warning" id="loginbtn">Reset</button>-->
     </div>
   </div>
-    <h3 id="output" ></h3>
 </form>
        <?php
     }
@@ -186,21 +191,115 @@ if(isset($_GET['page'])){
 
     
     ///////////////////////////////////////////////////////////
-//////////// Patient Examination //////////////////////
-//////////////////////////////////////////////////////////
-     if($_GET['page'] == "Examination"){
+    //////////// Tumor Record //////////////////////
+    //////////////////////////////////////////////////////////
+    if($_GET['page'] == "Tumor"){
         ?>
-<h3 class="text-center">Patient Examination</h3>
-<hr/>
+<legend>Tumor Record</legend>
 <form class="form-horizontal" role="form">
-    <!--Patient_id-->
+    <!--Topography-->
 <div class="form-group">
-    <label for="Patient_id" class="col-md-2 control-label">Patient_id</label>
+    <label for="Topography" class="col-md-2 control-label">Topography</label>
     <div class="col-md-4">
-      <input type="text" name="Patient_id" id="Patient_id" class="form-control validate[required]" placeholder="Patient_id">
+      <input type="text" name="Topography" id="Topography" class="form-control validate[required]" placeholder="Topography">
+      <input type="hidden" name="pid" id="pid" value="<?php echo $_POST['id'] ?>">
     </div>
   </div>
     
+ 
+  <!--Morphology-->
+  <div class="form-group">
+    <label for="Morphology" class="col-md-2 control-label">Morphology</label>
+    <div class="col-md-4">
+      <input type="text" name="Morphology" id="Morphology" class="form-control validate[required]"  placeholder="Morphology">
+    </div>
+  </div>
+ 
+  <!--Behavior-->
+  <div class="form-group">
+    <label for="Middle_Name" class="col-md-2 control-label">Behavior</label>
+    <div class="col-md-4">
+      <input type="text" name="Behavior" id="Behavior" class="form-control validate[required]"  placeholder="Behavior">
+    </div>
+  </div>
+    
+   <!--Date Of Incidence-->
+  <div class="form-group">
+    <label for="Incidence_Date" class="col-md-2 control-label">Date Of Incidence</label>
+    <div class="col-md-4">
+      <input type="Incidence_Date" name="Incidence_Date" id="Incidence_Date" class="form-control validate[required]" placeholder="Date Of Incidence">
+    </div>
+  </div>
+    
+   <!--Basis Diagnosis-->
+   <div class="form-group">
+    <label for="Basis_Diagnosis" class="col-md-2 control-label">Basis Diagnosis</label>
+    <div class="col-md-4">
+      <input type="text" name="Basis_Diagnosis" id="Basis_Diagnosis" class="form-control validate[required]"  placeholder="Basis Diagnosis">
+    </div>
+  </div>
+   
+   <!--ICD-10-->
+   <div class="form-group">
+    <label for="ICD_10" class="col-md-2 control-label">ICD-10</label>
+    <div class="col-md-4">
+      <input type="text" name="ICD_10" id="ICD_10" class="form-control validate[required]"  placeholder="ICD-10">
+    </div>
+  </div>
+   
+   <!--ICCC code-->
+   <div class="form-group">
+    <label for="ICCC_code" class="col-md-2 control-label">ICCC code</label>
+    <div class="col-md-4">
+      <input type="text" name="ICCC_code" id="ICCC_code" class="form-control validate[required]"  placeholder="ICCC code">
+    </div>
+  </div>
+   
+   <legend>Source</legend>
+   <!--Hospital-->
+   <div class="form-group">
+    <label for="Hospital" class="col-md-2 control-label">Hospital</label>
+    <div class="col-md-4">
+      <input type="text" name="Hospital" id="Hospital" class="form-control validate[required]"  placeholder="Hospital">
+    </div>
+  </div>
+   
+   <!--Path_lab_no-->
+   <div class="form-group">
+    <label for="Path_lab_no" class="col-md-2 control-label">Path_lab_no</label>
+    <div class="col-md-4">
+      <input type="text" name="Path_lab_no" id="Path_lab_no" class="form-control validate[required]"  placeholder="Path_lab_no">
+    </div>
+  </div>
+   
+   <!--Unit-->
+   <div class="form-group">
+    <label for="Unit" class="col-md-2 control-label">Unit</label>
+    <div class="col-md-4">
+      <input type="text" name="Unit" id="Unit" class="form-control validate[required]"  placeholder="Unit">
+    </div>
+  </div>
+   
+   <!--Case_no-->
+   <div class="form-group">
+    <label for="Case_no" class="col-md-2 control-label">Case_no</label>
+    <div class="col-md-4">
+      <input type="text" name="Case_no" id="Case_no" class="form-control validate[required]"  placeholder="Case_no">
+    </div>
+  </div>
+</form>
+       <?php
+    }
+    
+ ///////////////////////////////////////////////////////////
+//////////// Patient Examination //////////////////////
+//////////////////////////////////////////////////////////
+     if($_GET['page'] == "Examination"){
+         echo $_POST['id'];
+        ?>
+<form class="form-horizontal" role="form">
+    <legend>Patient Examination</legend>
+  
   <!--Biops Number-->
   <div class="form-group">
     <label for="Biops_Number" class="col-md-2 control-label">Biops Number</label>
@@ -232,15 +331,6 @@ if(isset($_GET['page'])){
       <textarea rows="5" name="Treatment_Details" id="Treatment_Details" class="form-control validate[required]"  placeholder="Treatment Details"></textarea>
     </div>
   </div>
-  
- 
-   <div class="form-group">
-    <div class="col-md-offset-2 col-md-8 pull-right">
-        <button type="reset" class="btn btn-warning" id="loginbtn">Reset</button>
-        <button type="button" class="btn btn-info" id="loginbtn">Done</button>
-    </div>
-  </div>
-    <h3 id="output" ></h3>
 </form>
        <?php
     }

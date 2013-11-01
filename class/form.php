@@ -12,6 +12,34 @@
  */
 class form {
    
+    static function addUser($sArray,$tableName)
+        {
+            $arrLength = count($sArray);
+            $counter = 0;
+            
+            $inQuery = "INSERT INTO {$tableName}(";
+            foreach ($sArray as $key => $value) 
+                {
+                $counter++;
+                $inQuery .= ($counter == $arrLength)?$key:$key . ",";
+            }
+            
+            $inQuery .= ") VALUES(" ;
+            $valCnter = 0;
+            foreach ($sArray as $key => $value) 
+                {
+                $valCnter++;
+                $value = mysql_real_escape_string($value);
+                $inQuery .= ($valCnter == $arrLength)?"'" .$value."'":"'".$value. "',";
+            }
+            
+            $inQuery .= ")";
+            
+            //echo $inQuery;
+            
+            $squery = mysql_query($inQuery) or die(mysql_error());
+        }
+    
    
     static function secretQuestions($name){
         $str = "<select name='$name'>";
@@ -57,7 +85,7 @@ class form {
     }
     
     static function categoryDropdown($name,$selected){
-        echo "<select  name='{$name}' class='form-control validate[required]'>";
+        echo "<select  name='{$name}' id='{$name}' class='form-control validate[required]'>";
        $arr = array("Accountong and Book Keeping","Administration and Office Management"
                     ,"Construction","Consultant","Banking and Finance","Advertising, Sales and Marketing"
                     ,"Customer Services and Relation","Communication","Drivers","Data Entry","Education and Teaching","Engineering"
@@ -94,7 +122,7 @@ class form {
     
         
    static function genderDropdown($selected){
-        $str = "<select name='gender' class='form-control validate[required]'>";
+        $str = "<select name='gender' id='gender' class='form-control validate[required]'>";
         $str .= "<option value=''><i class='fa fa-female'></i>Sex</option>";
         if($selected == "Female"){
             $str .= "<option value='Female' selected='selected'><i class='fa fa-female'></i>Female</option>";
@@ -125,17 +153,24 @@ class form {
         return $str;
     }
     
-    static function generalDropdown($name,$default){
+     static function generalDropdown($name,$default,$array,$selected){
         $str = "<select name='$name' class='form-control'echo >";
         $str .= "<option disabled='disabled' selected='selected'>$default</option>";
-        $str .= "<option>Option1</option><option>Option2</option><option>Option3</option><option>Option4</option><option>Option5</option>";
+        foreach ($array as $value) {
+            if($value == $selected)
+                $str .= "<option value='{$value}' selected='selected'>$value</option>";
+            else 
+                $str .= "<option value='{$value}'>$value</option>";
+        }
+        //$str .= "<option>Option1</option><option>Option2</option><option>Option3</option><option>Option4</option><option>Option5</option>";
         $str .= "</select>";
         return $str;
     }
     
+    
     static function regionalDropWithDefault($selected){
         $query = mysql_query("SELECT * FROM regions");
-        $str = "<select name='region' class='form-control'>";
+        $str = "<select name='region' id='region' class='form-control'>";
         $str .= "<option selected='selected'>Region</option>";
         while ($row = mysql_fetch_array($query)) {
             extract ($row);
@@ -173,7 +208,7 @@ class form {
         $query = mysql_query("SELECT * FROM regions WHERE region='$regi'");
         $str = "";
         if($regi == "all"){
-            $str.= "<select name='district' class='form-control'>";
+            $str.= "<select name='district' id='district' class='form-control'>";
             $str .= "<option selected='selected'>District</option>";
             $query1 = mysql_query("SELECT * FROM districts ORDER BY district");
             while ($row1 = mysql_fetch_array($query1)) {
@@ -185,7 +220,7 @@ class form {
         while ($row = mysql_fetch_array($query)) {
             extract($row);
             if($region == $regi){
-                $str.= "<select name='district' class='form-control'>";
+                $str.= "<select name='district' id='district' class='form-control'>";
                 $query1 = mysql_query("SELECT * FROM districts WHERE region_id=$id");
                 while ($row1 = mysql_fetch_array($query1)) {
                     extract($row1);
@@ -202,7 +237,7 @@ class form {
         $query = mysql_query("SELECT * FROM regions WHERE region='$regi'");
         $str = "";
         if($regi == "all"){
-            $str.= "<select name='district' class='form-control'>";
+            $str.= "<select name='village' id='village' class='form-control'>";
             $str .= "<option selected='selected'>Village</option>";
             $query1 = mysql_query("SELECT * FROM districts ORDER BY district");
             while ($row1 = mysql_fetch_array($query1)) {
@@ -214,7 +249,7 @@ class form {
         while ($row = mysql_fetch_array($query)) {
             extract($row);
             if($region == $regi){
-                $str.= "<select name='district' class='form-control'>";
+                $str.= "<select name='village' id='village' class='form-control'>";
                 $query1 = mysql_query("SELECT * FROM districts WHERE region_id=$id");
                 while ($row1 = mysql_fetch_array($query1)) {
                     extract($row1);
@@ -233,7 +268,7 @@ class form {
         $query = mysql_query("SELECT * FROM regions WHERE region='$regi'");
         $str = "";
         if($regi == "all"){
-            $str.= "<select name='district' class='form-control'>";
+            $str.= "<select  name='ward' id='ward'  class='form-control'>";
             $str .= "<option selected='selected'>Ward</option>";
             $query1 = mysql_query("SELECT * FROM districts ORDER BY district");
             while ($row1 = mysql_fetch_array($query1)) {
@@ -245,7 +280,7 @@ class form {
         while ($row = mysql_fetch_array($query)) {
             extract($row);
             if($region == $regi){
-                $str.= "<select name='district' class='form-control'>";
+                $str.= "<select  name='ward' id='ward'  class='form-control'>";
                 $query1 = mysql_query("SELECT * FROM districts WHERE region_id=$id");
                 while ($row1 = mysql_fetch_array($query1)) {
                     extract($row1);
@@ -731,7 +766,7 @@ class form {
     
     static function tribesList(){
         ?>
-  <select name="tribe" class="form-control">
+  <select name="tribe" id="tribe" class="form-control">
       <option selected="selected" disabled="disabled">Select Tribe</option>     
     <option>Alagwa</option>
     <option>Akiek</option>
