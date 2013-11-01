@@ -310,9 +310,9 @@ if(isset($_GET['page'])){
     
   <!--Basis_Of_Diagnosis-->
   <div class="form-group">
-    <label for="Basis_Of_Diagnosis" class="col-md-2 control-label">Biops Collected From</label>
+    <label for="Biops_collected" class="col-md-2 control-label">Biops Collected From</label>
     <div class="col-md-4">
-      <input type="text" name="Basis_Of_Diagnosis" id="Basis_Of_Diagnosis" class="form-control validate[required]"  placeholder="Basis Of Diagnosis">
+      <input type="text" name="Biops_collected" id="Biops_collected" class="form-control validate[required]"  placeholder="Biops Collected From">
     </div>
   </div>
  

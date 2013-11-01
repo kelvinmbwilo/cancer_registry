@@ -14,7 +14,7 @@ if(isset($_GET['page'])){
     }
     
     if($_GET['page'] == 'patient_reg'){
-       form::addUser($_POST, "patient");
+      form::addUser($_POST, "patient");
     }
     
     if($_GET['page'] == 'tumor_reg'){
@@ -30,5 +30,8 @@ if(isset($_GET['page'])){
        }
     }
     
+    if($_GET['page'] == 'examination'){
+       form::addUser($_POST, "examination");
+    }
 }
 ?>

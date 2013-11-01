@@ -35,7 +35,7 @@ class form {
             
             $inQuery .= ")";
             
-            //echo $inQuery;
+            echo $inQuery;
             
             $squery = mysql_query($inQuery) or die(mysql_error());
         }
