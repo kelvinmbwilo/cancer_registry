@@ -4,7 +4,7 @@
  */
 $(document).ready(function(){
     $("#patientmenu").click(function(){
-        $("#submit").hide();$("#submit1").hide();
+        
         $("#sidebar").html("<img src='img/loading.gif' /> Loading Menu..");
         $("#sidebar").load("includes/menus.php?page=patient",function(){
             $("#sidebar ul li").click(function(){
@@ -19,17 +19,17 @@ $(document).ready(function(){
              $("#submenus").html("");
              $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
              $("#maincontents").load("includes/forms.php?page=userRegistration",function(){
-                 $("#submit").show();
+                 
                  $("#Birth_Date").datepicker({
                     changeMonth: true,
                     changeYear: true,
                     dateFormat:"yy-mm-dd"
                 });
-                 $("#submit").click(function(){
+                 $("#submitbtn").click(function(){
                  var id =  $("#Patient_id").val(),fname=$("#First_Name").val(),mname=$("#Middle_Name").val(),lname=$("#Last_Name").val(),sex=$("#gender").val();
                  var dob =$("#Birth_Date").val(),tribe=$("#tribe").val(),Occupation = $("#Occupation").val(),country=$("#nationality").val(),region=$("#region").val();
                  var district = $("#district").val(),ward=$("#ward").val(),vill = $("#village").val(),ten =$("#Cell_leader").val();
-                 $("#submit").hide("slow");
+                 
                  $("#maincontents").html("<img src='img/loading.gif' /> Submitting Patient Information Please Wait To Fill Tumor Information...");    
                  $.ajax({
                     type: "POST",
@@ -56,18 +56,17 @@ $(document).ready(function(){
                     ////////////////////////////////////////////////////////////////
                     ///////////////////tumor Registration ///////////////////////////
                     ////////////////////////////////////////////////////////////////
-                    success: function(msg){
-                        alert(msg);
+                    success: function(){
                         $("#maincontents").html("<img src='img/loading.gif' />Patient Registered Successfull Loading Tumor Record form...");
                         $("#maincontents").load("includes/forms.php?page=Tumor",{id:id},function(){
-                            $("#submit1").show("slow");  $("#submit").show("slow");
+                            
                             $("#Incidence_Date").datepicker({
                                 changeMonth: true,
                                 changeYear: true,
                                 dateFormat:"yy-mm-dd"
                             });
                            
-                           $("#submit1").unbind("click").click(function(){
+                           $("#submitbtn1").click(function(){
                             $("#submit").hide("slow");$("#submit1").hide("slow");
                             $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait To Add Another Tumor Record...</span>");    
                             $("form").hide();
@@ -99,9 +98,8 @@ $(document).ready(function(){
                             });     
                         });//end of adding tumor
                            
-                            $("#submit").unbind("click").click(function(){
-                            $("#submit").hide("slow");$("#submit1").hide("slow");
-                            $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait To Add Examination Record...</span>");    
+                            $("#submitbtn").click(function(){
+                            $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait ...</span>");    
                             $.ajax({
                                type: "POST",
                                url: "includes/form_processor.php?page=tumor_reg",
@@ -128,10 +126,8 @@ $(document).ready(function(){
                                     $("#loader").remove();
                                     $("#maincontents").html("<img src='img/loading.gif' />Tumor Record added Successfull Loading Examination form...");
                                     $("#maincontents").load("includes/forms.php?page=Examination",{id:id},function(){
-                                        $("#submit1").show("slow");  $("#submit").show("slow");
-                                        $("#submit1").unbind("click").click(function(){
-                                        $("#submit").hide("slow");$("#submit1").hide("slow");
-                                        $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait To Add Another Tumor Record...</span>");    
+                                        $("#submitbtn1").click(function(){
+                                        $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait To Add Examination Record...</span>");    
                                         $("form").hide();
                                            $.ajax({
                                            type: "POST",
@@ -141,14 +137,38 @@ $(document).ready(function(){
                                                biopsy_number : $("#Biops_Number").val(),
                                                collected_from:$("#Biops_collected").val(),
                                                details:$("#Examination_Details").val(),
-                                               gis_details:$("#Behavior").val()
+                                               gis_details:$("#Treatment_Details").val()
                                            }, 
                                            cache: false,
                                            success: function(){
                                                 $("input, textarea, select").val("");
-                                                $("#submit").show("slow");$("#submit1").show("slow");
                                                 $("form").show("slow");
                                                 $("#loader").remove();
+                                           }
+
+                                        });     
+                                    });//end of adding examination
+                                
+                                $("#submitbtn").click(function(){
+                                        $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait...</span>");    
+                                        $("form").hide();
+                                           $.ajax({
+                                           type: "POST",
+                                           url: "includes/form_processor.php?page=examination",
+                                           data: {
+                                               patient_id : id,
+                                               biopsy_number : $("#Biops_Number").val(),
+                                               collected_from:$("#Biops_collected").val(),
+                                               details:$("#Examination_Details").val(),
+                                               gis_details:$("#Treatment_Details").val()
+                                           }, 
+                                           cache: false,
+                                           success: function(){
+                                               $("#maincontents").load("includes/form_processor.php?page=patientinfo",{id:id},function(){
+                                                   $("#loader").remove();
+                                               });
+                                                
+                                                
                                            }
 
                                         });     
@@ -168,15 +188,18 @@ $(document).ready(function(){
          ///////////////////////////////////////////////////////
          ////////////Patient Diagnosis /////////////////////////
          ///////////////////////////////////////////////////////
-         $("#patiDiagnosis").click(function(){
+         $("#listpat").click(function(){
              $("#submenus").html("");
-             $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
-             $("#maincontents").load("includes/forms.php?page=patDiagnosis",function(){
-                 $("#Date_Of_Incidence").datepicker({
-                    changeMonth: true,
-                    changeYear: true,
-                    dateFormat:"yy-mm-dd"
-                });
+             $("#maincontents").html("<img src='img/loading.gif' /> Loading Patient List Please Wait...");
+             $("#maincontents").load("includes/processes.php?page=list_patient",function(){
+                 $("#myTable").dataTable();
+                 $(".moreinfo").click(function(){
+                     var id1 = $(this).attr("id");
+                     $("#maincontents").html("<img src='img/loading.gif' /> Loading Patient Information Please Wait...");
+                     $("#maincontents").load("includes/form_processor.php?page=patientinfo1",{id:id1},function(){
+                         
+                     })
+                 });
              });
          });
      

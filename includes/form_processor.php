@@ -33,5 +33,25 @@ if(isset($_GET['page'])){
     if($_GET['page'] == 'examination'){
        form::addUser($_POST, "examination");
     }
+    
+    if($_GET['page'] == 'patientinfo'){
+        $patient = new patient("",$_POST['id']);
+        $patient->viewBasicInfo();
+    }
+    
+    if($_GET['page'] == 'patientinfo1'){
+        $patient = new patient($_POST['id'],"");
+        $patient->viewBasicInfo();
+    }
+    
+    if($_GET['page'] == 'adduser'){
+        $arr = array("password"=>  sha1("1234"));
+        $user1 = array_merge((array)$_POST, (array)$arr);
+        form::addUser($user1, "user");
+    }
+    
+    if($_GET['page'] == 'addocc'){
+      form::addUser($_POST, "occupation");
+    }
 }
 ?>

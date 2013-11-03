@@ -35,7 +35,7 @@ class form {
             
             $inQuery .= ")";
             
-            echo $inQuery;
+            //echo $inQuery;
             
             $squery = mysql_query($inQuery) or die(mysql_error());
         }
@@ -154,7 +154,7 @@ class form {
     }
     
      static function generalDropdown($name,$default,$array,$selected){
-        $str = "<select name='$name' class='form-control'echo >";
+        $str = "<select name='$name' id='$name' class='form-control'echo >";
         $str .= "<option disabled='disabled' selected='selected'>$default</option>";
         foreach ($array as $value) {
             if($value == $selected)

@@ -4,8 +4,6 @@
  */
 $(document).ready(function(){
     $("#setupmenu").click(function(){
-        
-        
        $("#sidebar").html("<img src='img/loading.gif' /> Loading Menu..");
        $("#sidebar").load("includes/menus.php?page=setup",function(){
            $("#sidebar ul li").click(function(){
@@ -21,7 +19,32 @@ $(document).ready(function(){
                     $("#addUser").click(function(){
                         $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
                         $("#maincontents").load("includes/forms.php?page=addUser",function(){
-                 
+                            $("#submitbtn").click(function(){
+                                var fname=$("#First_Name").val(),mname=$("#Middle_Name").val(),lname=$("#Last_Name").val(),sex=$("#gender").val();
+                                var level =$("#role").val(),phone=$("#Phone_Number").val(),email = $("#Email").val();
+                                $("#maincontents").html("<img src='img/loading.gif' /> Submitting User Information Please Wait...");    
+                                $.ajax({
+                                   type: "POST",
+                                   url: "includes/form_processor.php?page=adduser",
+                                   data: {
+                                       first_name : fname,
+                                       middle_name:mname,
+                                       last_name:lname,
+                                       gender:sex,
+                                       email:email,
+                                       phone:phone,
+                                       level:level
+                                   }, 
+                                   cache: false,
+
+                                   ////////////////////////////////////////////////////////////////
+                                   ///////////////////tumor Registration ///////////////////////////
+                                   ////////////////////////////////////////////////////////////////
+                                   success: function(msg){
+                                       alert(msg);
+                                   }
+                                });      
+                            });
                         });
                     });
                     
@@ -42,7 +65,7 @@ $(document).ready(function(){
                    $("#listuser").click(function(){
                         $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
                         $("#maincontents").load("includes/processes.php?page=list_user",function(){
-                           $("#myTable").tablesorter();
+                           $("#myTable").dataTable();
                         });
                     });
                  });           
@@ -97,13 +120,32 @@ $(document).ready(function(){
                         $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
                         $("#maincontents").load("includes/forms.php?page=addOccupation",function(){
                            $("#myTable").tablesorter();
+                           $("#submitbtn").click(function(){
+                                var name=$("#Name").val();
+                                $("#maincontents").html("<img src='img/loading.gif' /> Submitting User Information Please Wait...");    
+                                $.ajax({
+                                   type: "POST",
+                                   url: "includes/form_processor.php?page=addocc",
+                                   data: {
+                                       name : name
+                                   }, 
+                                   cache: false,
+
+                                   success: function(){
+                                       $("#maincontents").html("Occupation Information Added Successfull");
+                                        setTimeout(function()  {
+                                             $("#addOccupation").trigger("click");
+                                           }, 2000);
+                                   }
+                                });      
+                            });
                         });
                     });
                 
                 $("#listOccupation").click(function(){
                         $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
                         $("#maincontents").load("includes/processes.php?page=list_Occupation",function(){
-                           $("#myTable").tablesorter();
+                           $("#myTable").dataTable();
                         });
                     });
                 

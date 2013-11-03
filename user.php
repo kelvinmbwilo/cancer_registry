@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="css/tooltipster.css" type="text/css" />
         <link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css" />
         <link rel="stylesheet" href="css/style.css" type="text/css" />
+        <link rel="stylesheet" href="DataTables/media/css/jquery.dataTables.css" type="text/css" />
+        <link rel="stylesheet" href="DataTables/media/css/jquery.dataTables_themeroller.css" type="text/css" />
         
         <title>POPULATION CANCER REGISTRY</title>
     </head>
@@ -25,10 +27,7 @@
                 </div>
                 
                 <div class="row" id="maincontents"></div>
-                <div class="row" id="">
-                    <button type="button" class="btn btn-info col-md-offset-2" id="submit">Submit</button>
-                    <button type="button" class="btn btn-default" id="submit1">Submit And Add Another</button>
-                </div>
+                
             </div>
         </div>
         <!--putting script bellow so that page load slow-->
@@ -39,7 +38,9 @@
         <script type="text/javascript" src="js/jquery.validationEngine-en.js"></script> 
         <script type="text/javascript" src="js/jquery.validationEngine.js"></script>
         <script type="text/javascript" src="js/jquery.form.js"></script>
-        <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script> 
+        <!--<script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>--> 
+        <script type="text/javascript" src="DataTables/media/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="DataTables/media/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="js/login.js"></script>
         <script type="text/javascript" src="js/patient.js"></script>
         <script type="text/javascript" src="js/report.js"></script>

@@ -14,6 +14,7 @@ class examination {
     //intance variable
     private $patient_id;
     private $biopsy_number;
+    private $collected_from;
     private $details;
     private $gis_details;
     
@@ -27,6 +28,7 @@ class examination {
                 $this->patient_id = $patient_id;
                 $this->biopsy_number = $biopsy_number;
                 $this->details = $details;
+                $this->collected_from= $collected_from;
                 $this->gis_details = $gis_details;
             }
     }
@@ -71,7 +73,22 @@ class examination {
         {
             $query = mysql_query("UPDATE examination SET gis_details='{$value}' WHERE biopsy_number='{$this->biopsy_number}'") or die(mysql_error());
         }
-        
+        function viewBasicInfo(){
+            ?>
+<table class="table table-bordered table-hover table-responsive">
+    <tr>
+        <th>Biopsy Number</th><th>Collected From</th><th>Examination Details</th>
+        <th>Treatment Details</th>
+    </tr>
+    <tr>
+        <td><?php echo $this->biopsy_number ?></td>
+        <td><?php echo $this->collected_from ?></td>
+        <td><?php echo $this->details ?></td>
+        <td><?php echo $this->gis_details ?></td>
+    </tr>
+</table>
+<?php
+}
 }
 
 ?>

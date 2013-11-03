@@ -5,8 +5,10 @@ function __autoload($class_name) {
 }
 if(isset($_GET['page'])){
     if($_GET['page'] == "list_user"){
+        $query = mysql_query("SELECT * FROM user");
         ?>
-<table id="myTable" class="tablesorter"> 
+<h3>System Users </h3>
+<table id="myTable" class="display tablesorter"> 
 <thead> 
 <tr> 
     <th>First Name</th>
@@ -16,50 +18,86 @@ if(isset($_GET['page'])){
     <th>Role</th> 
 </tr> 
 </thead> 
-<tbody> 
+<tbody>
+    <?php while ($row = mysql_fetch_array($query)) {
+                
+             ?>
 <tr> 
-    <td>Smith</td> 
-    <td>John</td> 
-    <td>jsmith@gmail.com</td> 
-    <td>$50.00</td> 
-    <td>http://www.jsmith.com</td> 
+    <td><?php echo $row['first_name'] ?></td> 
+    <td><?php echo $row['last_name'] ?></td> 
+    <td><?php echo $row['email'] ?></td> 
+    <td><?php echo $row['phone'] ?></td> 
+    <td><?php echo $row['level'] ?></td> 
 </tr> 
-<tr> 
-    <td>Bach</td> 
-    <td>Frank</td> 
-    <td>fbach@yahoo.com</td> 
-    <td>$50.00</td> 
-    <td>http://www.frank.com</td> 
-</tr> 
-<tr> 
-    <td>Doe</td> 
-    <td>Jason</td> 
-    <td>jdoe@hotmail.com</td> 
-    <td>$100.00</td> 
-    <td>http://www.jdoe.com</td> 
-</tr> 
-<tr> 
-    <td>Conway</td> 
-    <td>Tim</td> 
-    <td>tconway@earthlink.net</td> 
-    <td>$50.00</td> 
-    <td>http://www.timconway.com</td> 
-</tr> 
+
+<?php } ?>
 </tbody> 
+
+<tfoot> 
+<tr> 
+    <th>First Name</th>
+     <th>Last Name</th>
+    <th>Email</th> 
+    <th>Cell Phone</th> 
+    <th>Role</th> 
+</tr> 
+</tfoot> 
 </table> 
-<ul class="pagination">
-  <li><a href="#">&laquo;</a></li>
-  <li><a href="#">1</a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-  <li><a href="#">&raquo;</a></li>
-</ul>
+
         <?php
     }
     
-     if($_GET['page'] == "list_Location"){
+    if($_GET['page'] == "list_patient"){
+        $query = mysql_query("SELECT * FROM patient");
+        ?>
+<table id="myTable" class="display tablesorter"> 
+<thead> 
+<tr> 
+    <th>Patient_id</th>
+    <th>First Name</th>
+    <th>Middle Name</th>
+    <th>Last Name</th> 
+    <th>Gender</th> 
+    <th>Date of Birth</th> 
+    <th>Country</th> 
+    <th>Region</th> 
+</tr> 
+</thead> 
+<tbody>
+    <?php while ($row = mysql_fetch_array($query)) {
+                
+             ?>
+<tr> 
+    <td><?php echo $row['patient_id'] ?></td> 
+    <td><?php echo $row['first_name'] ?></td> 
+    <td><?php echo $row['last_name'] ?></td> 
+    <td><?php echo $row['last_name'] ?></td> 
+    <td><?php echo $row['gender'] ?></td>
+    <td><?php echo $row['date_of_birth'] ?></td> 
+    <td><a href="#" id="<?php echo $row['id'] ?>" class="moreinfo">Info</a></td> 
+    <td><?php echo $row['region'] ?></td>  
+</tr> 
+
+<?php } ?>
+</tbody> 
+
+<tfoot> 
+<tr> 
+    <th>Patient_id</th>
+     <th>Middle Name</th>
+    <th>Last Name</th> 
+    <th>Gender</th> 
+    <th>Date of Birth</th> 
+    <th>Country</th> 
+    <th>Region</th>  
+</tr> 
+</tfoot> 
+</table> 
+
+        <?php
+    }
+    
+    if($_GET['page'] == "list_Location"){
         ?>
 <h4>Filter Option</h4>
 <div class="row" style="padding-bottom: 5px">
@@ -127,7 +165,7 @@ if(isset($_GET['page'])){
         <?php
     }
 
-     if($_GET['page'] == "list_Occupation"){
+    if($_GET['page'] == "list_Occupation"){
         ?>
 <h4>Filter Option</h4>
 <div class="row" style="padding-bottom: 5px">

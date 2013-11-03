@@ -30,9 +30,10 @@ class patient {
     private $patient_status;
     
     //constroctur
-    function __construct($pid) 
+    function __construct($id,$pid) 
     {
-        $query = mysql_query("SELECT * FROM patient WHERE id='{$pid}'");
+        $squery =($id == "")?"SELECT * FROM patient WHERE patient_id='{$pid}'":"SELECT * FROM patient WHERE id='{$id}'";
+        $query = mysql_query($squery);
         while ($row = mysql_fetch_array($query)) 
             {
                 extract($row);
@@ -200,6 +201,101 @@ class patient {
         {
             $query = mysql_query("UPDATE patient SET patient_status='{$value}' WHERE id='{$this->id}'") or die(mysql_error());
         }
+        
+     function viewBasicInfo(){
+         ?>
+<h3 class="text-center text-info"><?php echo strtoupper( $this->first_name." ".$this->middle_name." ".$this->last_name) ?></h3>
+<h3>Basic Information</h3>
+<table class="table table-condensed table-bordered table-hover">
+    <tr>
+        <td><b>Patient_id</b></td>
+        <td><?php echo $this->patient_id ?></td>
+        <td><b>Name</b></td>
+        <td><?php echo $this->first_name." ".$this->middle_name." ".$this->last_name ?></td>
+    </tr>
+    <tr>
+        <td><b>Date Of Birth</b></td>
+        <td><?php echo date("j,M Y",  strtotime($this->date_of_birth)) ?></td>
+        <td><b>Gender</b></td>
+        <td><?php echo $this->gender ?></td>
+    </tr>
+    <tr>
+        <td><b>Occupation</b></td>
+        <td><?php echo $this->occupation ?></td>
+        <td><b>Tribe</b></td>
+        <td><?php echo $this->tribe ?></td>
+    </tr>
+    <tr>
+        <td><b>Country</b></td>
+        <td><?php echo $this->country ?></td>
+        <td><b>Region</b></td>
+        <td><?php echo $this->region ?></td>
+    </tr>
+    <tr>
+        <td><b>District</b></td>
+        <td><?php echo $this->district ?></td>
+        <td><b>Ward</b></td>
+        <td><?php echo $this->ward ?></td>
+    </tr>
+    <tr>
+        <td><b>Village</b></td>
+        <td><?php echo $this->village ?></td>
+        <td><b>Ten Cell Leader</b></td>
+        <td><?php echo $this->ten_cell_leder ?></td>
+    </tr>
+    
+</table>
+<h3>Tumor Record(s) <a href="#s" class="btn btn-info btn-xs"><i class="fa fa-plus"></i> </a> </h3>
+<div class="accordion" id="accordion2">
+    <?php 
+    $query1 = mysql_query("SELECT * FROM tumor WHERE patient_id='{$this->patient_id}'");
+    $count= 0;
+    while ($row = mysql_fetch_array($query1)) {
+        $count++;
+    ?>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<?php echo $count ?>">
+          <strong>Tumor Record #<?php echo $count ?> <i class="fa fa-angle-double-down fa-lg pull-left"></i></strong>
+      </a><button class="btn btn-xs"><i class="fa fa-pencil"></i></button>
+    </div>
+    <div id="collapse<?php echo $count ?>" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <?php $tumor = new tumor($row['id']);
+        echo $tumor->viewBasicInfo();
+        ?>
+      </div>
+    </div>
+  </div>
+    <?php  } ?>
+</div>
+
+<h3>Examination Record(s) <a href="#s" class="btn btn-info btn-xs"><i class="fa fa-plus"></i> </a></h3> 
+<div class="accordion" id="accordion3">
+    <?php 
+    $query1 = mysql_query("SELECT * FROM examination WHERE patient_id='{$this->patient_id}'");
+    $count= 0;
+    while ($row = mysql_fetch_array($query1)) {
+        $count++;
+    ?>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collaps<?php echo $count ?>">
+          <strong>Examination Record #<?php echo $count ?>  <i class="fa fa-angle-double-down fa-lg pull-left"></i></strong>
+      </a><button class="btn btn-xs"><i class="fa fa-pencil"></i></button>
+    </div>
+    <div id="collaps<?php echo $count ?>" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <?php $exam = new examination($row['biopsy_number']);
+        echo $exam->viewBasicInfo();
+        ?>
+      </div>
+    </div>
+  </div>
+    <?php  } ?>
+</div>
+<?php
+     }
 }
 
 ?>

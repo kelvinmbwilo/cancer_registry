@@ -8,8 +8,8 @@ if(isset($_GET['page'])){
         ?>
         <ul class="nav nav-tabs nav-stacked">
             <li class="active" id="registerpatient"><a href="#"><i class="fa fa-plus-circle fa-lg"></i> Registration <i class="fa fa-chevron-right pull-right"></i></a></li>
-            <li><a href="#" id="patiDiagnosis"><i class="fa fa-stethoscope fa-lg"></i> Diagnosis <i class="fa fa-chevron-right pull-right"></i></a></li>
-            <li><a href="#" id="patiexamination"><i class="fa fa-medkit fa-lg"></i> Examination <i class="fa fa-chevron-right pull-right"></i></a></li>
+          <li><a href="#" id="listpat"><i class="fa fa-list fa-lg"></i> List Patients <i class="fa fa-chevron-right pull-right"></i></a></li>
+          <!--    <li><a href="#" id="patiexamination"><i class="fa fa-medkit fa-lg"></i> Examination <i class="fa fa-chevron-right pull-right"></i></a></li>-->
             <li><a href="#" id="followup"><i class="fa fa-link fa-lg"></i> Follow Up <i class="fa fa-chevron-right pull-right"></i></a></li>
             <li><a href="#" id="encounter"><i class="fa fa-th fa-lg"></i> Encounter <i class="fa fa-chevron-right pull-right"></i></a></li>
           </ul>

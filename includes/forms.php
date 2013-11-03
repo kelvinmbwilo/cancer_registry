@@ -102,17 +102,18 @@ if(isset($_GET['page'])){
     </div>
      
      <div class="col-md-2">
-        <?php echo form::wardDropdown("all"); ?>
+        ward:<input type="text" name="ward" id="ward" class="form-control validate[required]"  placeholder="Ward">
     </div>
      
      <div class="col-md-2">
-        <?php echo form::villageDropdown("all"); ?>
+       Village <input type="text" name="village" id="village" class="form-control validate[required]"  placeholder="Village">
     </div>
      
   </div>
    <div class="form-group">
-    <div class="col-md-offset-2 col-md-10 pull-right">
-        <!--<button type="reset" class="btn btn-warning" id="loginbtn">Reset</button>-->
+    <div class="col-md-offset-2 col-md-8 pull-right">
+        <button type="reset" class="btn btn-warning">Reset</button>
+        <button type="button" class="btn btn-primary" id="submitbtn">Submit</button>
     </div>
   </div>
 </form>
@@ -287,6 +288,14 @@ if(isset($_GET['page'])){
       <input type="text" name="Case_no" id="Case_no" class="form-control validate[required]"  placeholder="Case_no">
     </div>
   </div>
+   
+   <div class="form-group">
+    <div class="col-md-offset-2 col-md-8 pull-right">
+        <button type="reset" class="btn btn-warning">Reset</button>
+        <button type="button" class="btn btn-info" id="submitbtn1">Add Another</button>
+        <button type="button" class="btn btn-primary" id="submitbtn">Submit</button>
+    </div>
+  </div>
 </form>
        <?php
     }
@@ -329,6 +338,14 @@ if(isset($_GET['page'])){
     <label for="Diagnosis_Done_Before" class="col-md-2 control-label">Treatment Details</label>
     <div class="col-md-4">
       <textarea rows="5" name="Treatment_Details" id="Treatment_Details" class="form-control validate[required]"  placeholder="Treatment Details"></textarea>
+    </div>
+  </div>
+   
+   <div class="form-group">
+    <div class="col-md-offset-2 col-md-8 pull-right">
+        <button type="reset" class="btn btn-warning">Reset</button>
+        <button type="button" class="btn btn-info" id="submitbtn1">Add Another</button>
+        <button type="button" class="btn btn-primary" id="submitbtn">Submit</button>
     </div>
   </div>
 </form>
@@ -412,9 +429,8 @@ if(isset($_GET['page'])){
     //////////////////////////////////////////////////////////
     if($_GET['page'] == "addUser"){
         ?>
-<h3 class="text-center">Add User</h3>
-<hr/>
 <form class="form-horizontal" role="form">
+    <legend>Add User</legend>
      <!--First Name-->
   <div class="form-group">
     <label for="First_Name" class="col-md-2 control-label">First Name</label>
@@ -453,7 +469,7 @@ if(isset($_GET['page'])){
     <label for="Role" class="col-md-2 control-label">Role</label>
     <div class="col-md-4">
       <!--<input type="text" name="Occupation" id="Occupation" class="form-control validate[required]"  placeholder="Occupation">-->
-      <?php echo form::categoryDropdown("Role"); ?>
+      <?php echo form::generalDropdown("role", "Role", array("Admin","Doctor"), ""); ?>
     </div>
   </div>
   <!--Email-->
@@ -474,8 +490,8 @@ if(isset($_GET['page'])){
     
    <div class="form-group">
     <div class="col-md-offset-2 col-md-8 pull-right">
-        <button type="reset" class="btn btn-warning" id="loginbtn">Reset</button>
-        <button type="button" class="btn btn-info" id="loginbtn">Done</button>
+        <button type="reset" class="btn btn-warning" >Reset</button>
+        <button type="button" class="btn btn-info" id="submitbtn">Done</button>
     </div>
   </div>
     <h3 id="output" ></h3>
@@ -686,7 +702,7 @@ if(isset($_GET['page'])){
     <label for="Middle_Name" class="col-md-2 control-label">Level</label>
     <div class="col-md-4">
       <!--<input type="text" name="Middle_Name" id="Middle_Name" class="form-control validate[required]"  placeholder="Middle Name">-->
-      <?php echo form::generalDropdown("","Level"); ?>
+      <?php echo form::generalDropdown("level","Level",array("Ward","Village"),""); ?>
     </div>
   </div>
     
@@ -703,7 +719,7 @@ if(isset($_GET['page'])){
     <label for="Parent Node" class="col-md-2 control-label">Parent Node</label>
     <div class="col-md-4">
       <!--<input type="text" name="Sex" id="Sex" class="form-control validate[required]"  placeholder="Sex">-->
-      <?php echo form::generalDropdown("","Parent Node"); ?>
+       <?php echo form::generalDropdown("Parent Level","parent",array("Region","District","Ward"),""); ?>
     </div>
   </div>
  
@@ -888,7 +904,7 @@ if(isset($_GET['page'])){
      
    <div class="form-group">
     <div class="col-md-offset-2 col-md-8 ">
-        <button type="button" class="btn btn-success" id="loginbtn">Add</button>
+        <button type="button" class="btn btn-success" id="submitbtn">Add</button>
     </div>
   </div>
     <h3 id="output" ></h3>
