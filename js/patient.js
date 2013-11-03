@@ -28,7 +28,7 @@ $(document).ready(function(){
                  $("#submitbtn").click(function(){
                  var id =  $("#Patient_id").val(),fname=$("#First_Name").val(),mname=$("#Middle_Name").val(),lname=$("#Last_Name").val(),sex=$("#gender").val();
                  var dob =$("#Birth_Date").val(),tribe=$("#tribe").val(),Occupation = $("#Occupation").val(),country=$("#nationality").val(),region=$("#region").val();
-                 var district = $("#district").val(),ward=$("#ward").val(),vill = $("#village").val(),ten =$("#Cell_leader").val();
+                 var district = $("#district").val(),ward=$("#ward").val(),vill = $("#village").val(),ten =$("#Cell_leader").val(),phon=$("#phone_number").val();
                  
                  $("#maincontents").html("<img src='img/loading.gif' /> Submitting Patient Information Please Wait To Fill Tumor Information...");    
                  $.ajax({
@@ -40,6 +40,7 @@ $(document).ready(function(){
                         middle_name:mname,
                         last_name:lname,
                         gender:sex,
+                        phone:phon,
                         date_of_birth:dob,
                         tribe:tribe,
                         occupation:Occupation,
@@ -209,7 +210,7 @@ $(document).ready(function(){
                                 $("#submitbtn").click(function(){
                                     var id =  $("#Patient_id").val(),fname=$("#First_Name").val(),mname=$("#Middle_Name").val(),lname=$("#Last_Name").val(),sex=$("#gender").val();
                                     var dob =$("#Birth_Date").val(),tribe=$("#tribe").val(),Occupation = $("#Occupation").val(),country=$("#nationality").val(),region=$("#region").val();
-                                    var district = $("#district").val(),ward=$("#ward").val(),vill = $("#village").val(),ten =$("#Cell_leader").val();
+                                    var district = $("#district").val(),ward=$("#ward").val(),vill = $("#village").val(),ten =$("#Cell_leader").val(),phon=$("#phone_number").val();
                                     $("#maincontents").html("<img src='img/loading.gif' /> Submitting Patient Information Please Wait...");    
                                     $.ajax({
                                        type: "POST",
@@ -220,6 +221,7 @@ $(document).ready(function(){
                                            middle_name:mname,
                                            last_name:lname,
                                            gender:sex,
+                                           phone:phon,
                                            date_of_birth:dob,
                                            occupation:Occupation,
                                            region:region,

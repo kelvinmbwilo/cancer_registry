@@ -342,7 +342,13 @@ class patient {
       <?php echo form::genderDropdown($this->gender); ?>
     </div>
   </div>
- 
+ <!--phone number-->
+   <div class="form-group">
+    <label for="phone_number" class="col-md-2 control-label">Phone Number</label>
+    <div class="col-md-4">
+      <input type="text" name="phone_number" id="phone_number" class="form-control validate[required]"  placeholder="Phone Number">
+    </div>
+  </div>
  <!--Occupation-->
  <div class="form-group">
     <label for="Occupation" class="col-md-2 control-label">Occupation</label>

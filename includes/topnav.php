@@ -10,7 +10,7 @@
     </button><img src="img/logo.png" class="right">
       
   </div>
-<a class="navbar-brand  text-center" href="#"> <b class="text-primary">MBEYA REGIONAL HOSPTAL CANCER REGISTRY</b></a>
+<a class="navbar-brand  text-center" href="#"> <b class="text-primary">MBEYA REFERRAL HOSPITAL CANCER REGISTRY</b></a>
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav" style="padding-left: 100px">
