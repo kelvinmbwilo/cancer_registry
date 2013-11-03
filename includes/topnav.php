@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="padding-bottom: 10px">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header col-md-12 text-center" style="padding-bottom: 10px">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -10,7 +10,7 @@
     </button><img src="img/logo.png" class="right">
       
   </div>
-<a class="navbar-brand text-primary text-center" href="#"> <b>POPULATION CANCER REGISTRY</b></a>
+<a class="navbar-brand  text-center" href="#"> <b class="text-primary">MBEYA REGIONAL HOSPTAL CANCER REGISTRY</b></a>
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav" style="padding-left: 100px">
