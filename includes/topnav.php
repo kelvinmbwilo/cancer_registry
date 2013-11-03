@@ -1,19 +1,19 @@
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
-  <div class="navbar-header col-md-12 ">
+  <div class="navbar-header col-md-12 text-center" style="padding-bottom: 10px">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
       <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand text-primary" href="#"><b>POPULATION CANCER REGISTRY</b></a>
+    </button><img src="img/logo.png" class="right">
+      
   </div>
-
+<a class="navbar-brand text-primary text-center" href="#"> <b>POPULATION CANCER REGISTRY</b></a>
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
-    <ul class="nav navbar-nav">
+    <ul class="nav navbar-nav" style="padding-left: 100px">
       <li class="active"><a href="#" class="btn btn-default" id="patientmenu"><i class="fa fa-wheelchair fa-lg"></i> <b>Patient </b></a></li>
       <li style="padding-left: 35px;"><a href="#" class="btn btn-default" id="reportmenu"><i class="fa fa-bar-chart-o fa-lg"></i> <b>Report </b></a></li>
       <li style="padding-left: 35px;"><a href="#" class="btn btn-default" id="setupmenu"><i class="fa fa-cogs fa-lg"></i><b> Setup </b></a></li>

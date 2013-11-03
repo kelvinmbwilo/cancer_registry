@@ -15,6 +15,7 @@
         <title>POPULATION CANCER REGISTRY</title>
     </head>
     <body>
+        
         <?php include 'includes/topnav.php'; ?>
         <div class="row" style="padding-top: 120px">
             <div class="col-md-3" id="sidebar" >
@@ -34,6 +35,8 @@
             <hr />
             <p class="text-center"> &COPY;Softmed Tanzania Limited 2013 </p>
         </div>
+               
+                
         <!--putting script bellow so that page load slow-->
         <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
