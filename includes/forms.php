@@ -196,8 +196,9 @@ if(isset($_GET['page'])){
     //////////////////////////////////////////////////////////
     if($_GET['page'] == "Tumor"){
         ?>
-<legend>Tumor Record</legend>
+
 <form class="form-horizontal" role="form">
+    <legend>Tumor Record</legend>
     <!--Topography-->
 <div class="form-group">
     <label for="Topography" class="col-md-2 control-label">Topography</label>

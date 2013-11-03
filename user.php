@@ -30,6 +30,10 @@
                 
             </div>
         </div>
+        <div class="container">
+            <hr />
+            <p class="text-center"> &COPY;Softmed Tanzania Limited 2013 </p>
+        </div>
         <!--putting script bellow so that page load slow-->
         <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>

@@ -39,6 +39,23 @@ class form {
             
             $squery = mysql_query($inQuery) or die(mysql_error());
         }
+        
+         static function editUser($sArray,$tableName,$id,$idvalue)
+        {
+            $arrLength = count($sArray);
+            $counter = 0;
+            
+            $inQuery = "UPDATE {$tableName} SET ";
+            foreach ($sArray as $key => $value) 
+                {
+                $counter++;
+                $inQuery .= ($counter == $arrLength)?" {$key}='{$value}' ":" {$key}='{$value}' " . ",";
+            }
+            $inQuery .=" WHERE {$id}='{$idvalue}'";
+            echo $inQuery;
+            
+            $squery = mysql_query($inQuery) or die(mysql_error());
+        }
     
    
     static function secretQuestions($name){
@@ -204,7 +221,7 @@ class form {
         return $str;
     }
    
-    static function districtDropdown($regi){
+    static function districtDropdown($regi,$selected){
         $query = mysql_query("SELECT * FROM regions WHERE region='$regi'");
         $str = "";
         if($regi == "all"){
@@ -213,7 +230,8 @@ class form {
             $query1 = mysql_query("SELECT * FROM districts ORDER BY district");
             while ($row1 = mysql_fetch_array($query1)) {
                 extract($row1);
-                $str .= "<option>$district</option>";
+                
+                $str .=($district == $selected)?"<option selected='selected'>$district</option>":"<option>$district</option>";
             }
             $str .="</select>";
         }else{

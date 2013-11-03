@@ -174,6 +174,111 @@ class tumor {
             <?php
             }
         }
+
+        function editTumor(){
+            $source = new source("", $this->id);
+            ?>
+            <form class="form-horizontal" role="form">
+                <legend>Edit Tumor Record</legend>
+                <!--Topography-->
+            <div class="form-group">
+                <label for="Topography" class="col-md-2 control-label">Topography</label>
+                <div class="col-md-4">
+                    <input type="text" name="Topography" id="Topography" class="form-control validate[required]" value="<?php echo $this->topograph ?>">
+                  <input type="hidden" name="pid" id="pid" value="<?php echo $_POST['id'] ?>">
+                </div>
+              </div>
+
+
+              <!--Morphology-->
+              <div class="form-group">
+                <label for="Morphology" class="col-md-2 control-label">Morphology</label>
+                <div class="col-md-4">
+                  <input type="text" name="Morphology" id="Morphology" class="form-control validate[required]"  value="<?php echo $this->morphology?>">
+                </div>
+              </div>
+
+              <!--Behavior-->
+              <div class="form-group">
+                <label for="Middle_Name" class="col-md-2 control-label">Behavior</label>
+                <div class="col-md-4">
+                  <input type="text" name="Behavior" id="Behavior" class="form-control validate[required]" value="<?php echo $this->behavior ?>">
+                </div>
+              </div>
+
+               <!--Date Of Incidence-->
+              <div class="form-group">
+                <label for="Incidence_Date" class="col-md-2 control-label">Date Of Incidence</label>
+                <div class="col-md-4">
+                  <input type="Incidence_Date" name="Incidence_Date" id="Incidence_Date" class="form-control validate[required]" value="<?php echo $this->incidance_date ?>">
+                </div>
+              </div>
+
+               <!--Basis Diagnosis-->
+               <div class="form-group">
+                <label for="Basis_Diagnosis" class="col-md-2 control-label">Basis Diagnosis</label>
+                <div class="col-md-4">
+                  <input type="text" name="Basis_Diagnosis" id="Basis_Diagnosis" class="form-control validate[required]"  value="<?php echo $this->basis_diagnosis ?>">
+                </div>
+              </div>
+
+               <!--ICD-10-->
+               <div class="form-group">
+                <label for="ICD_10" class="col-md-2 control-label">ICD-10</label>
+                <div class="col-md-4">
+                  <input type="text" name="ICD_10" id="ICD_10" class="form-control validate[required]"  value="<?php echo $this->ICD_10 ?>">
+                </div>
+              </div>
+
+               <!--ICCC code-->
+               <div class="form-group">
+                <label for="ICCC_code" class="col-md-2 control-label">ICCC code</label>
+                <div class="col-md-4">
+                  <input type="text" name="ICCC_code" id="ICCC_code" class="form-control validate[required]"  value="<?php echo $this->ICCC_code ?>">
+                </div>
+              </div>
+
+               <legend>Source</legend>
+               <!--Hospital-->
+               <div class="form-group">
+                <label for="Hospital" class="col-md-2 control-label">Hospital</label>
+                <div class="col-md-4">
+                    <input type="text" name="Hospital" id="Hospital" class="form-control validate[required]"  value="<?php echo $source->getHosptal() ?>">
+                </div>
+              </div>
+
+               <!--Path_lab_no-->
+               <div class="form-group">
+                <label for="Path_lab_no" class="col-md-2 control-label">Path_lab_no</label>
+                <div class="col-md-4">
+                    <input type="text" name="Path_lab_no" id="Path_lab_no" class="form-control validate[required]"  value="<?php echo $source->getPathLab() ?>">
+                </div>
+              </div>
+
+               <!--Unit-->
+               <div class="form-group">
+                <label for="Unit" class="col-md-2 control-label">Unit</label>
+                <div class="col-md-4">
+                    <input type="text" name="Unit" id="Unit" class="form-control validate[required]"  value="<?php echo $source->getUnit() ?>">
+                </div>
+              </div>
+
+               <!--Case_no-->
+               <div class="form-group">
+                <label for="Case_no" class="col-md-2 control-label">Case_no</label>
+                <div class="col-md-4">
+                    <input type="text" name="Case_no" id="Case_no" class="form-control validate[required]"  value="<?php echo $source->getCaseNo()?>">
+                </div>
+              </div>
+
+               <div class="form-group">
+                <div class="col-md-offset-2 col-md-8 pull-right">
+                    <button type="button" class="btn btn-primary" id="submitbtn">Submit</button>
+                </div>
+              </div>
+            </form>
+<?php
+        }
 }
 
 ?>

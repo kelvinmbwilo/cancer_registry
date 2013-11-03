@@ -22,7 +22,6 @@ if(isset($_GET['page'])){
        form::addUser($output, "tumor");
        $query = mysql_query("select * from tumor order by id desc limit 1");
        while ($row = mysql_fetch_array($query)) {
-           echo $row['id'];
            $arr = array("tumor_id"=> $row['id']);
            $source = array_slice($_POST, 8, 4);
            $source1 = array_merge((array)$arr, (array)$source);
@@ -42,6 +41,37 @@ if(isset($_GET['page'])){
     if($_GET['page'] == 'patientinfo1'){
         $patient = new patient($_POST['id'],"");
         $patient->viewBasicInfo();
+    }
+    
+    if($_GET['page'] == 'editpatientinfo'){
+        $patient = new patient($_POST['id'],"");
+        $patient->editPatient();
+    }
+    
+    if($_GET['page'] == 'editpatientinfo1'){
+        form::editUser($_POST, "patient","id",$_POST['id']);
+    }
+    
+    if($_GET['page'] == 'editexaminfo'){
+       $exam = new examination($_POST['id']);
+       $exam->editExam();
+    }
+    
+    if($_GET['page'] == 'editexaminfo1'){
+        form::editUser($_POST, "examination","biopsy_number",$_POST['biopsy_number']);
+    }
+    
+    if($_GET['page'] == 'edittumorinfo'){
+        $tumor = new tumor($_POST['id']);
+        $tumor->editTumor();
+    }
+    
+    if($_GET['page'] == 'edittumorinfo1'){
+        $tumor = array_slice($_POST, 0, 8);
+        form::editUser($tumor, "tumor","id",$_POST['id']);
+        echo $_POST['id'];
+        $tumor1 = array_slice($_POST, 8, 4);
+        form::editUser($tumor1, "source","tumor_id",$_POST['id']);
     }
     
     if($_GET['page'] == 'adduser'){

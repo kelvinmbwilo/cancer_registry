@@ -34,8 +34,30 @@ class source {
                 $this->unit= $unit;
                 $this->case_no= $case_no;
             }
+    } 
+            function getId(){
+                return $this->id;
+            }
             
-    }
+            function getTumorId(){
+                return $this->tumor_id;
+            }
+            
+            function getHosptal(){
+                return $this->hosptal;
+            }
+            
+            function getPathLab(){
+                return $this->path_lab_no;
+            }
+            
+            function getCaseNo(){
+                return $this->case_no;
+            }
+            
+            function getUnit(){
+                return $this->unit;
+            }
 }
 
 ?>

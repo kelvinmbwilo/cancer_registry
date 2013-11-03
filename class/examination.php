@@ -77,17 +77,66 @@ class examination {
             ?>
 <table class="table table-bordered table-hover table-responsive">
     <tr>
-        <th>Biopsy Number</th><th>Collected From</th><th>Examination Details</th>
-        <th>Treatment Details</th>
+        <th>Biopsy Number</th><td><?php echo $this->biopsy_number ?></td>
     </tr>
-    <tr>
-        <td><?php echo $this->biopsy_number ?></td>
-        <td><?php echo $this->collected_from ?></td>
-        <td><?php echo $this->details ?></td>
-        <td><?php echo $this->gis_details ?></td>
-    </tr>
+        <tr>
+            <th>Collected From</th><td><?php echo $this->collected_from ?></td>
+        </tr>
+        <tr>
+            <th>Examination Details</th><td><?php echo $this->details ?></td>
+        </tr>
+        <tr>
+            <th>Treatment Details</th><td><?php echo $this->gis_details ?></td>
+        </tr>
+    
 </table>
 <?php
+}
+
+function editExam(){
+     ?>
+<form class="form-horizontal" role="form">
+    <legend>Edit Patient Examination Details</legend>
+  
+  <!--Biops Number-->
+  <div class="form-group">
+    <label for="Biops_Number" class="col-md-2 control-label">Biops Number</label>
+    <div class="col-md-4">
+        <input type="text" disabled="disabled" name="Biops_Number" id="Biops_Number" class="form-control validate[required]" value="<?php echo $this->biopsy_number ?>">
+    </div>
+  </div>
+    
+  <!--Basis_Of_Diagnosis-->
+  <div class="form-group">
+    <label for="Biops_collected" class="col-md-2 control-label">Biops Collected From</label>
+    <div class="col-md-4">
+      <input type="text" name="Biops_collected" id="Biops_collected" class="form-control validate[required]"  value="<?php echo $this->collected_from ?>">
+    </div>
+  </div>
+ 
+  <!--Examination Details-->
+  <div class="form-group">
+    <label for="Middle_Name" class="col-md-2 control-label">Examination Details</label>
+    <div class="col-md-4">
+      <textarea rows="5" name="Examination_Details" id="Examination_Details" class="form-control validate[required]"><?php echo $this->details ?></textarea>
+    </div>
+  </div>
+    
+   <!--Treatment Details-->
+   <div class="form-group">
+    <label for="Diagnosis_Done_Before" class="col-md-2 control-label">Treatment Details</label>
+    <div class="col-md-4">
+      <textarea rows="5" name="Treatment_Details" id="Treatment_Details" class="form-control validate[required]"  ><?php echo $this->gis_details ?></textarea>
+    </div>
+  </div>
+   
+   <div class="form-group">
+    <div class="col-md-offset-2 col-md-8 pull-right">
+        <button type="button" class="btn btn-primary" id="submitbtn">Submit Changes</button>
+    </div>
+  </div>
+</form>
+       <?php
 }
 }
 

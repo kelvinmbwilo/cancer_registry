@@ -59,8 +59,7 @@ if(isset($_GET['page'])){
     <th>Last Name</th> 
     <th>Gender</th> 
     <th>Date of Birth</th> 
-    <th>Country</th> 
-    <th>Region</th> 
+    <th></th> 
 </tr> 
 </thead> 
 <tbody>
@@ -74,8 +73,10 @@ if(isset($_GET['page'])){
     <td><?php echo $row['last_name'] ?></td> 
     <td><?php echo $row['gender'] ?></td>
     <td><?php echo $row['date_of_birth'] ?></td> 
-    <td><a href="#" id="<?php echo $row['id'] ?>" class="moreinfo">Info</a></td> 
-    <td><?php echo $row['region'] ?></td>  
+    <td>
+        <a href="#" id="<?php echo $row['id'] ?>" class="moreinfo btn btn-primary btn-xs" title="View More Details"><i class="fa fa-info"></i> Info</a>
+        <a href="#" id="<?php echo $row['id'] ?>" class="deletepat text-danger btn btn-danger btn-xs" title="Delete Patient"><i class="fa fa-trash-o"></i> </a>
+    </td>  
 </tr> 
 
 <?php } ?>
@@ -88,8 +89,7 @@ if(isset($_GET['page'])){
     <th>Last Name</th> 
     <th>Gender</th> 
     <th>Date of Birth</th> 
-    <th>Country</th> 
-    <th>Region</th>  
+    <th></th> 
 </tr> 
 </tfoot> 
 </table> 

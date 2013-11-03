@@ -197,8 +197,249 @@ $(document).ready(function(){
                      var id1 = $(this).attr("id");
                      $("#maincontents").html("<img src='img/loading.gif' /> Loading Patient Information Please Wait...");
                      $("#maincontents").load("includes/form_processor.php?page=patientinfo1",{id:id1},function(){
-                         
-                     })
+                        $(".editbasic").click(function(){
+                            $("#maincontents").html("<img src='img/loading.gif' /> Loading Patient Information Please Wait...");
+                            $("#maincontents").load("includes/form_processor.php?page=editpatientinfo",{id:id1},function(){
+                                
+                                $("#Birth_Date").datepicker({
+                                   changeMonth: true,
+                                   changeYear: true,
+                                   dateFormat:"yy-mm-dd"
+                               });
+                                $("#submitbtn").click(function(){
+                                    var id =  $("#Patient_id").val(),fname=$("#First_Name").val(),mname=$("#Middle_Name").val(),lname=$("#Last_Name").val(),sex=$("#gender").val();
+                                    var dob =$("#Birth_Date").val(),tribe=$("#tribe").val(),Occupation = $("#Occupation").val(),country=$("#nationality").val(),region=$("#region").val();
+                                    var district = $("#district").val(),ward=$("#ward").val(),vill = $("#village").val(),ten =$("#Cell_leader").val();
+                                    $("#maincontents").html("<img src='img/loading.gif' /> Submitting Patient Information Please Wait...");    
+                                    $.ajax({
+                                       type: "POST",
+                                       url: "includes/form_processor.php?page=editpatientinfo1",
+                                       data: {
+                                           id:id1,
+                                           first_name : fname,
+                                           middle_name:mname,
+                                           last_name:lname,
+                                           gender:sex,
+                                           date_of_birth:dob,
+                                           occupation:Occupation,
+                                           region:region,
+                                           district:district,
+                                           ward:ward,
+                                           village:vill,
+                                           ten_cell_leder:ten,
+                                       }, 
+                                       cache: false,
+
+                                       ////////////////////////////////////////////////////////////////
+                                       ///////////////////tumor Registration ///////////////////////////
+                                       ////////////////////////////////////////////////////////////////
+                                       success: function(msg){
+                                          $("#listpat").trigger("click"); 
+                                       }
+                                    });
+                                       
+                                });
+                            });
+                        });//end of editing basic info
+                       
+                        $(".edittumor").click(function(){
+                            var tid = $(this).attr("id");
+                            $("#maincontents").html("<img src='img/loading.gif' /> Loading Patient Tumor Information Please Wait...");
+                            $("#maincontents").load("includes/form_processor.php?page=edittumorinfo",{id:tid},function(){
+                                $("#Incidence_Date").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat:"yy-mm-dd"
+                                });
+                                $("#submitbtn").click(function(){
+                                var topo = $("#Topography").val(),morp=$("#Morphology").val(),beh=$("#Behavior").val(),inc=$("#Incidence_Date").val(),base=$("#Basis_Diagnosis").val();
+                                var icd=$("#ICD_10").val(),icc=$("#ICCC_code").val(),hosptal=$("#Hospital").val(),path_lab_no=$("#Path_lab_no").val(),unit=$("#Unit").val(),case_no=$("#Case_no").val();
+                                $("#maincontents").html("<span id='loader'><img src='img/loading.gif' /> Submitting Patient tumor Information Please Wait ...</span>");    
+                                $.ajax({
+                                   type: "POST",
+                                   url: "includes/form_processor.php?page=edittumorinfo1",
+                                   data: {
+                                       id:tid,
+                                       topograph : topo,
+                                       morphology:morp,
+                                       behavior:beh,
+                                       incidance_date:inc,
+                                       basis_diagnosis:base,
+                                       ICD_10:icd,
+                                       ICCC_code:icc,
+                                       hosptal:hosptal,
+                                       path_lab_no:path_lab_no,
+                                       unit:unit,
+                                       case_no:case_no
+                                   }, 
+                                   cache: false,
+
+                                   ////////////////////////////////////////////////////////////////
+                                   ///////////////////Diagnosis Registration ///////////////////////////
+                                   ////////////////////////////////////////////////////////////////
+                                   success: function(msg){
+                                      $("#listpat").trigger("click");
+                                   }
+                                });
+                               });
+                            })
+                        });//end of editing tumor
+                    
+                        $(".editExam").click(function(){
+                            var id1 = $(this).attr("id");
+                            $("#maincontents").html("<img src='img/loading.gif' /> Loading Patient Information Please Wait...");
+                            $("#maincontents").load("includes/form_processor.php?page=editexaminfo",{id:id1},function(){
+                                $("#submitbtn").click(function(){
+                                    var bio = $("#Biops_Number").val(), coll=$("#Biops_collected").val(), exam=$("#Examination_Details").val();
+                                    var gis=$("#Treatment_Details").val(); 
+                                    $("#maincontents").html("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait To Add Examination Record...</span>");    
+                                    $("form").hide();
+                                       $.ajax({
+                                       type: "POST",
+                                       url: "includes/form_processor.php?page=editexaminfo1",
+                                       data: {
+                                           biopsy_number : bio,
+                                           collected_from:coll,
+                                           details:exam,
+                                           gis_details:gis
+                                       }, 
+                                       cache: false,
+                                       success: function(){
+                                            $("#listpat").trigger("click");
+                                       }
+
+                                    });     
+                                });//end of adding examination
+                            });
+                        });//endof editing examination
+                    
+                        $(".addtumorrec").click(function(){
+                            var id1 = $(this).attr("id");
+                            $("#maincontents").html("<img src='img/loading.gif' /> Loading Form To Add Tumor Record Please Wait...");
+                            $("#maincontents").load("includes/forms.php?page=Tumor",{id:id1},function(){
+                                 $("#Incidence_Date").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat:"yy-mm-dd"
+                                });
+                                $("#submitbtn1").click(function(){
+                                    var topo = $("#Topography").val(),morp=$("#Morphology").val(),beh=$("#Behavior").val(),inc=$("#Incidence_Date").val(),base=$("#Basis_Diagnosis").val();
+                                    var icd=$("#ICD_10").val(),icc=$("#ICCC_code").val(),hosptal=$("#Hospital").val(),path_lab_no=$("#Path_lab_no").val(),unit=$("#Unit").val(),case_no=$("#Case_no").val();
+                                    $("#submit").hide("slow");$("#submit1").hide("slow");
+                                    $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait To Add Another Tumor Record...</span>");    
+                                    $("form").hide();
+                                       $.ajax({
+                                       type: "POST",
+                                       url: "includes/form_processor.php?page=tumor_reg",
+                                       data: {
+                                            patient_id : id1,
+                                            topograph : topo,
+                                            morphology:morp,
+                                            behavior:beh,
+                                            incidance_date:inc,
+                                            basis_diagnosis:base,
+                                            ICD_10:icd,
+                                            ICCC_code:icc,
+                                            hosptal:hosptal,
+                                            path_lab_no:path_lab_no,
+                                            unit:unit,
+                                            case_no:case_no
+                                       }, 
+                                       cache: false,
+                                       success: function(msg){
+                                            $("input, textarea, select").val("");
+                                            $("form").show("slow");
+                                            $("#loader").remove();
+                                       }
+
+                                    });     
+                                });//end of adding tumor
+
+                                    $("#submitbtn").click(function(){
+                                    var topo = $("#Topography").val(),morp=$("#Morphology").val(),beh=$("#Behavior").val(),inc=$("#Incidence_Date").val(),base=$("#Basis_Diagnosis").val();
+                                    var icd=$("#ICD_10").val(),icc=$("#ICCC_code").val(),hosptal=$("#Hospital").val(),path_lab_no=$("#Path_lab_no").val(),unit=$("#Unit").val(),case_no=$("#Case_no").val();
+                                    $("#submit").hide("slow");$("#submit1").hide("slow");
+                                    $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait To Add Another Tumor Record...</span>");    
+                                    $("form").hide();
+                                       $.ajax({
+                                       type: "POST",
+                                       url: "includes/form_processor.php?page=tumor_reg",
+                                       data: {
+                                            patient_id : id1,
+                                            topograph : topo,
+                                            morphology:morp,
+                                            behavior:beh,
+                                            incidance_date:inc,
+                                            basis_diagnosis:base,
+                                            ICD_10:icd,
+                                            ICCC_code:icc,
+                                            hosptal:hosptal,
+                                            path_lab_no:path_lab_no,
+                                            unit:unit,
+                                            case_no:case_no
+                                       }, 
+                                       cache: false,
+                                       success: function(msg){
+                                            $("#listpat").trigger("click");
+                                       }
+                                    });
+                                    });//end of adding tumor
+                            });
+                        })//end of adding patient tumor record
+                    
+                        $(".addex").click(function(){
+                            var id1=$(this).attr("id");
+                            $("#maincontents").html("<img src='img/loading.gif' /> Loading Patient Information Please Wait...");
+                            $("#maincontents").load("includes/forms.php?page=Examination",function(){
+                                $("#submitbtn1").click(function(){
+                                    var bio = $("#Biops_Number").val(), coll=$("#Biops_collected").val(), exam=$("#Examination_Details").val();
+                                    var gis=$("#Treatment_Details").val(); 
+                                    $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait To Add Examination Record...</span>");    
+                                    $("form").hide();
+                                       $.ajax({
+                                       type: "POST",
+                                       url: "includes/form_processor.php?page=examination",
+                                       data: {
+                                           patient_id : id1,
+                                           biopsy_number : bio,
+                                           collected_from:coll,
+                                           details:exam,
+                                           gis_details:gis
+                                       }, 
+                                       cache: false,
+                                       success: function(){
+                                            $("input, textarea, select").val("");
+                                            $("form").show("slow");
+                                            $("#loader").remove();
+                                       }
+
+                                    });     
+                                    });//end of adding examination
+                                
+                                    $("#submitbtn").click(function(){
+                                        var bio = $("#Biops_Number").val(), coll=$("#Biops_collected").val(), exam=$("#Examination_Details").val();
+                                        var gis=$("#Treatment_Details").val(); 
+                                        $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait...</span>");    
+                                        $("form").hide();
+                                           $.ajax({
+                                           type: "POST",
+                                           url: "includes/form_processor.php?page=examination",
+                                           data: {
+                                                patient_id : id1,
+                                                biopsy_number : bio,
+                                                collected_from:coll,
+                                                details:exam,
+                                                gis_details:gis
+                                           }, 
+                                           cache: false,
+                                           success: function(){
+                                              $("#listpat").trigger("click"); 
+                                           } 
+                                        });     
+                                    });//end of adding examination
+                            });
+                        });
+                     });
                  });
              });
          });
