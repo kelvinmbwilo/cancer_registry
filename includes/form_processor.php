@@ -18,6 +18,7 @@ if(isset($_GET['page'])){
     }
     
     if($_GET['page'] == 'tumor_reg'){
+        
        $output = array_slice($_POST, 0, 8);
        form::addUser($output, "tumor");
        $query = mysql_query("select * from tumor order by id desc limit 1");
@@ -26,6 +27,10 @@ if(isset($_GET['page'])){
            $source = array_slice($_POST, 8, 4);
            $source1 = array_merge((array)$arr, (array)$source);
            form::addUser($source1, "source");
+           
+           foreach ($_POST['treat'] as $value) {
+                $query = mysql_query("INSERT INTO treatment VALUES('','{$row['id']}','{$value}')");
+            }
        }
     }
     
@@ -82,6 +87,17 @@ if(isset($_GET['page'])){
     
     if($_GET['page'] == 'addocc'){
       form::addUser($_POST, "occupation");
+    }
+    
+    if($_GET['page'] == "addfoloup"){
+       $arr = array("filling_date"=> date("Y-m-d"));
+        $follow = array_merge((array)$_POST, (array)$arr);
+        form::addUser($follow, "folow_up");
+    }
+
+    if($_GET['page'] == "deletepat"){
+        echo "DELETE FROM patient WHERE id='{$_POST['id']}'";
+        $query = mysql_query("DELETE FROM patient WHERE id='{$_POST['id']}'") or die(mysql_error());
     }
 }
 ?>

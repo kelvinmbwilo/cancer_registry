@@ -205,11 +205,30 @@ if(isset($_GET['page'])){
 
 <form class="form-horizontal" role="form">
     <legend>Tumor Record</legend>
+     <!--Date Of Incidence-->
+  <div class="form-group">
+    <label for="Incidence_Date" class="col-md-2 control-label">Date Of Incidence</label>
+    <div class="col-md-4">
+      <input type="Incidence_Date" name="Incidence_Date" id="Incidence_Date" class="form-control validate[required]" placeholder="Date Of Incidence">
+    </div>
+  </div>
+    
+    
     <!--Topography-->
 <div class="form-group">
     <label for="Topography" class="col-md-2 control-label">Topography</label>
     <div class="col-md-4">
-      <input type="text" name="Topography" id="Topography" class="form-control validate[required]" placeholder="Topography">
+        
+        <?php 
+      $query1 = mysql_query("SELECT * FROM site_of_tumor");
+      $arr1 = array();
+      while ($row = mysql_fetch_array($query1)) {
+          $arr1["{$row['id']}"] = $row['value'];
+      }
+     // $arr = array("Death certificate only","Histology of metastasis","Clinical only ","Cytology / Haematology","Specific tumour markers","Histology of primary","Clinical investigations","Unknown");
+      echo form::generalDropdown("Topography", "Topography", $arr1, ""); 
+      ?>
+      <!--<input type="text" name="Topography" id="Topography" class="form-control validate[required]" placeholder="Topography">-->
       <input type="hidden" name="pid" id="pid" value="<?php echo $_POST['id'] ?>">
     </div>
   </div>
@@ -231,38 +250,63 @@ if(isset($_GET['page'])){
     </div>
   </div>
     
-   <!--Date Of Incidence-->
-  <div class="form-group">
-    <label for="Incidence_Date" class="col-md-2 control-label">Date Of Incidence</label>
-    <div class="col-md-4">
-      <input type="Incidence_Date" name="Incidence_Date" id="Incidence_Date" class="form-control validate[required]" placeholder="Date Of Incidence">
-    </div>
-  </div>
-    
+  
    <!--Basis Diagnosis-->
    <div class="form-group">
     <label for="Basis_Diagnosis" class="col-md-2 control-label">Basis Diagnosis</label>
     <div class="col-md-4">
-      <input type="text" name="Basis_Diagnosis" id="Basis_Diagnosis" class="form-control validate[required]"  placeholder="Basis Diagnosis">
+      <!--<input type="text" name="Basis_Diagnosis" id="Basis_Diagnosis" class="form-control validate[required]"  placeholder="Basis Diagnosis">-->
+      <?php 
+      $query = mysql_query("SELECT * FROM basis_diagnosis");
+      $arr = array();
+      while ($row = mysql_fetch_array($query)) {
+          $arr["{$row['id']}"] = $row['value'];
+      }
+     // $arr = array("Death certificate only","Histology of metastasis","Clinical only ","Cytology / Haematology","Specific tumour markers","Histology of primary","Clinical investigations","Unknown");
+      echo form::generalDropdown("Basis_Diagnosis", "Basis Of Diagnosis", $arr, ""); 
+      ?>
     </div>
   </div>
    
    <!--ICD-10-->
    <div class="form-group">
-    <label for="ICD_10" class="col-md-2 control-label">ICD-10</label>
+    <label for="ICD_10" class="col-md-2 control-label">Stage</label>
     <div class="col-md-4">
-      <input type="text" name="ICD_10" id="ICD_10" class="form-control validate[required]"  placeholder="ICD-10">
+      <?php 
+      $query = mysql_query("SELECT * FROM stages");
+      $arr = array();
+      while ($row = mysql_fetch_array($query)) {
+          $arr["{$row['code']}"] = $row['stage'];
+      }
+      echo form::generalDropdown("ICD_10", "Stage", $arr, ""); 
+      ?>
+      <!--<input type="text" name="ICD_10" id="ICD_10" class="form-control validate[required]"  placeholder="ICD-10">-->
     </div>
   </div>
    
    <!--ICCC code-->
    <div class="form-group">
-    <label for="ICCC_code" class="col-md-2 control-label">ICCC code</label>
+    <!--<label for="ICCC_code" class="col-md-2 control-label">ICCC code</label>-->
     <div class="col-md-4">
-      <input type="text" name="ICCC_code" id="ICCC_code" class="form-control validate[required]"  placeholder="ICCC code">
+      <input type="hidden" name="ICCC_code" id="ICCC_code" class="form-control validate[required]"  placeholder="ICCC code">
     </div>
   </div>
-   
+   <legend>Treatment</legend>
+   <label>
+      <input type="checkbox" name="treat[]" value="Surgery"> Surgery
+    </label>
+   <label>
+       <input type="checkbox" name="treat[]" value="Radiotherapy"> Radiotherapy
+    </label>
+   <label>
+      <input type="checkbox" name="treat[]" value="Chemotherapy"> Chemotherapy
+    </label>
+   <label>
+      <input type="checkbox" name="treat[]" value="Hormone therapy "> Hormone therapy 
+    </label>
+   <label>
+      <input type="checkbox" name="treat[]" value="Other"> Other
+    </label>
    <legend>Source</legend>
    <!--Hospital-->
    <div class="form-group">
@@ -360,69 +404,60 @@ if(isset($_GET['page'])){
     }
     
     
+    
     ///////////////////////////////////////////////////////////
     ////////////patient Followup /////////////////////////////
     //////////////////////////////////////////////////////////
     if($_GET['page'] == "follow_up"){
         ?>
 <h3 class="text-center">Patient Follow Up</h3>
-<hr/>
-<form class="form-horizontal" role="form">
-    <!--Patient_id-->
-<div class="form-group">
-    <label for="Patient_id" class="col-md-2 control-label">Patient_id</label>
-    <div class="col-md-4">
-      <input type="text" name="Patient_id" id="Patient_id" class="form-control validate[required]" placeholder="Patient_id">
-    </div>
-  </div>
-    
-   <div class="form-group">
-    <div class="col-md-offset-2 col-md-8">
-        <button type="button" class="btn btn-warning" id="loginbtn">View Follow Up status</button>
-        <button type="button" class="btn btn-info" id="loginbtn">Start Examination</button>
-    </div>
-  </div>
-</form>
+
 <hr />
-<div class="row">
-    <div class="col-md-4">Total Follow Ups Done To Date</div><div class="col-md-8 text-left"><b>6</b></div>
-</div>
-<div class="row">
-    <div class="col-md-4">Date Of Last Follow UP</div><div class="col-md-8 text-left"><b>12 june 2009</b></div>
-</div>
-<div class="row">
-    <div class="col-md-4">Area Of Diagnosis</div><div class="col-md-8 text-left"><b>Left Leg</b></div>
-</div>
+
     <form class="form-horizontal" role="form">
   
   <!--Diagnosis Details-->
   <div class="form-group">
-    <label for="Middle_Name" class="col-md-2 control-label">Diagnosis Details</label>
+    <label for="Date" class="col-md-2 control-label">Date of last contact</label>
     <div class="col-md-4">
-      <textarea rows="5" name="Diagnosis_Details" id="Diagnosis_Details" class="form-control validate[required]"  placeholder="Diagnosis Details"></textarea>
+      <input type="text" id="last_date" name="last_date" id="last_date" class="form-control validate[required]" placeholder="Date of last contact">
     </div>
   </div>
  
   <!--Examination Details-->
   <div class="form-group">
-    <label for="Middle_Name" class="col-md-2 control-label">Examination Details</label>
+    <label for="Middle_Name" class="col-md-2 control-label">Status at last contact</label>
     <div class="col-md-4">
-      <textarea rows="5" name="Examination_Details" id="Examination_Details" class="form-control validate[required]"  placeholder="Examination Details"></textarea>
+      <?php
+     $statusarr = array("Alive","Dead","Not Known ");
+      echo form::generalDropdown("status", "Status at last contact", $statusarr, ""); 
+      ?>
     </div>
   </div>
-    
    <!--Treatment Details-->
    <div class="form-group">
-    <label for="Diagnosis_Done_Before" class="col-md-2 control-label">Treatment Details</label>
+    <label for="Diagnosis_Done_Before" class="col-md-2 control-label">Cause of death <br>(Leave if not applicable)</label>
     <div class="col-md-4">
-      <textarea rows="5" name="Treatment_Details" id="Treatment_Details" class="form-control validate[required]"  placeholder="Treatment Details"></textarea>
+     <?php
+     $causearr = array("This cancer","0ther cause","Not Known ");
+      echo form::generalDropdown("deathcause", "Cause of death", $causearr, ""); 
+      ?>
+        
+    </div>
+  </div>
+   
+   <!--Treatment Details-->
+   <div class="form-group">
+    <label for="data_enter" class="col-md-2 control-label">Data entered by</label>
+    <div class="col-md-4">
+      <input type="text" name="drname" id="drname" class="form-control validate[required]" placeholder="Data entered by">
     </div>
   </div>
   
    <div class="form-group">
     <div class="col-md-offset-2 col-md-8 pull-right">
         <button type="reset" class="btn btn-warning" id="loginbtn">Reset</button>
-        <button type="button" class="btn btn-info" id="loginbtn">Done</button>
+        <button type="button" class="btn btn-info followbtn" id="followbtn">Done</button>
     </div>
   </div>
     <h3 id="output" ></h3>

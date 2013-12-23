@@ -50,7 +50,7 @@ if(isset($_GET['page'])){
     if($_GET['page'] == "list_patient"){
         $query = mysql_query("SELECT * FROM patient");
         ?>
-<table id="myTable" class="display tablesorter"> 
+<table id="myTable" class="display tablesorter table-bordered"> 
 <thead> 
 <tr> 
     <th>Patient_id</th>
@@ -74,8 +74,8 @@ if(isset($_GET['page'])){
     <td><?php echo $row['gender'] ?></td>
     <td><?php echo $row['date_of_birth'] ?></td> 
     <td>
-        <a href="#" id="<?php echo $row['id'] ?>" class="moreinfo btn btn-primary btn-xs" title="View More Details"><i class="fa fa-info"></i> Info</a>
-        <a href="#" id="<?php echo $row['id'] ?>" class="deletepat text-danger btn btn-danger btn-xs" title="Delete Patient"><i class="fa fa-trash-o"></i> </a>
+        <a href="#s" id="<?php echo $row['id'] ?>" class="moreinfo btn btn-primary btn-xs" title="View More Details"><i class="fa fa-info"></i> Info</a>
+        <a href="#a" id="<?php echo $row['id'] ?>" class="deletepat text-danger btn btn-danger btn-xs" title="Delete Patient"><i class="fa fa-trash-o"></i> </a>
     </td>  
 </tr> 
 
@@ -261,34 +261,65 @@ if(isset($_GET['page'])){
         ?>
 <h4>Report Specific Filters</h4>
 <div class="container">
-    <div class="col-md-2"><?php echo form::generalDropdown("","Select Region"); ?></div>
-    <div class="col-md-2"><?php echo form::generalDropdown("","Select District"); ?></div>
-    <div class="col-md-2"><?php echo form::generalDropdown("","Select Ward"); ?></div>
-    <div class="col-md-2"><?php echo form::generalDropdown("","Select Village"); ?></div>
+    <div class="col-md-2"><?php echo form::regionalDropWithDefault(); ?></div>
+    <div class="col-md-2"><?php echo form::districtDropdown("all"); ?></div>
+    <div class="col-md-2"><?php echo form::genderDropdown(""); ?></div>
+    <div class="col-md-2"><?php echo form::generalDropdown("","Age Range",array("All Ages","Write Age","2","3","4","5","6","7","8","9","10")); ?></div>
 </div>
 <div class="container">
-    <div class="col-md-3">Report Type<?php echo form::generalDropdown("","Quick View"); ?></div>
-    <div class="col-md-3">Select Range 
+    
+    <div class="col-md-4">Select Range 
         From: <input type="text" id="from" name="from" class="form-control"/>
         
     </div>
-    <div class="col-md-3">to:  <input type="text" id="to" name="to" class="form-control"/></div>
+    <div class="col-md-4">to:  <input type="text" id="to" name="to" class="form-control" placeholder="start date"/></div>
 </div>
 
-<h4>Choose Indicators</h4>
+<div class="btn btn-info btn-sm tog" style="margin: 10px" id="toggleadv">Advanced Filters</div>
+<div class="container" id="advfilters">
 <div class="container">
-    <div class="col-md-2"><input type="checkbox" />All</div>
-    <div class="col-md-2"><input type="checkbox" />Transfers</div>
-    <div class="col-md-3"><input type="checkbox" />Total Submissions</div>
-    <div class="col-md-3"><input type="checkbox" />Total Referrals Given</div>
+    <div class="col-md-3">
+        <?php
+        $query = mysql_query("SELECT * FROM basis_diagnosis");
+      $arr = array();
+      while ($row = mysql_fetch_array($query)) {
+          $arr["{$row['id']}"] = $row['value'];
+      }
+     // $arr = array("Death certificate only","Histology of metastasis","Clinical only ","Cytology / Haematology","Specific tumour markers","Histology of primary","Clinical investigations","Unknown");
+      echo form::generalDropdown("Basis_Diagnosis", "Basis Of Diagnosis", $arr, ""); 
+      ?>
+    </div>
+    <div class="col-md-2">
+        <?php 
+      $query1 = mysql_query("SELECT * FROM site_of_tumor");
+      $arr1 = array();
+      while ($row = mysql_fetch_array($query1)) {
+          $arr1["{$row['id']}"] = $row['value'];
+      }
+     // $arr = array("Death certificate only","Histology of metastasis","Clinical only ","Cytology / Haematology","Specific tumour markers","Histology of primary","Clinical investigations","Unknown");
+      echo form::generalDropdown("Topography", "Topography", $arr1, ""); 
+      ?>
+    </div>
+    <div class="col-md-2">
+        <?php echo form::generalDropdown("","Morphology",array("All Ages","Write Age","2","3","4","5","6","7","8","9","10")); ?>
+    </div>
+    <div class="col-md-3"><?php echo form::generalDropdown("","Behevior",array("All Ages","Write Age","2","3","4","5","6","7","8","9","10")); ?></div>
 </div>
-<div class="container">
-    <div class="col-md-2"><input type="checkbox" />Registration</div>
-    <div class="col-md-2"><input type="checkbox" />Deaths</div>
-    <div class="col-md-3"><input type="checkbox" />Total Submissions By Name</div>
-    <div class="col-md-3"><input type="checkbox" />Total Referrals Confirmed</div>
+<div class="container" style="padding-top: 10px">
+    <div class="col-md-2"><?php 
+      $query = mysql_query("SELECT * FROM stages");
+      $arr = array();
+      while ($row = mysql_fetch_array($query)) {
+          $arr["{$row['code']}"] = $row['stage'];
+      }
+      echo form::generalDropdown("ICD_10", "Stage", $arr, ""); 
+      ?></div>
+    <div class="col-md-2"><?php echo form::generalDropdown("","Treatment",array("All","Surgery","Radiotherapy","Chemotherapy","Hormone therapy","Other")); ?></div>
+    <div class="col-md-3"><?php echo form::generalDropdown("","Death Cause",array("All","This cancer","Other cause")); ?></div>
+    <div class="col-md-3"><?php echo form::generalDropdown("","Age Range",array("All Ages","Write Age","2","3","4","5","6","7","8","9","10")); ?></div>
 </div>
 
+</div>
 <div class="container" style="padding-top: 15px">
     <div class="col-md-2"></div>
     <div class="col-md-2"><button type="button" class="btn btn-info">View</button></div>
@@ -301,6 +332,9 @@ if(isset($_GET['page'])){
     </div>
     
 </div>
+
+
+<div id="container" style="width:90%; height:400px;">afdsaf</div>
         <?php
     }
 }

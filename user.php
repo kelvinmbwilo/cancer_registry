@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" />
         <link rel="stylesheet" href="DataTables/media/css/jquery.dataTables.css" type="text/css" />
         <link rel="stylesheet" href="DataTables/media/css/jquery.dataTables_themeroller.css" type="text/css" />
-        
+
         <title>POPULATION CANCER REGISTRY</title>
     </head>
     <body>
@@ -34,11 +34,12 @@
         <div class="container">
             <hr />
             <p class="text-center"> &COPY;Softmed Tanzania Limited 2013 </p>
-        </div>
-               
+        </div>  
                 
         <!--putting script bellow so that page load slow-->
         <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="Highcharts/js/highcharts.js"></script>
+        <script type="text/javascript" src="Highcharts/js/modules/exporting.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="jqueryui/js/jquery-ui-1.10.3.custom.min.js"></script>
         <script type="text/javascript" src="js/jquery.tooltipster.min.js"></script>
@@ -52,6 +53,11 @@
         <script type="text/javascript" src="js/patient.js"></script>
         <script type="text/javascript" src="js/report.js"></script>
         <script type="text/javascript" src="js/setup.js"></script>
-        <script type="text/javascript" src="js/extra.js"></script>
+        <script type="text/javascript" src="js/extra.js"></script>  
+        
+        <script type="text/javascript" src="js/statistics.js"></script>  
+        
+
+        
     </body>
 </html>

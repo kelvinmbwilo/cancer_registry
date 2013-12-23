@@ -25,6 +25,7 @@ class patient {
     private $region;
     private $district;
     private $ward;
+    private $phone;
     private $village;
     private $ten_cell_leder;
     private $patient_status;
@@ -50,6 +51,7 @@ class patient {
                 $this->region =  $region;
                 $this->district =  $district;
                 $this->ward =  $ward;
+                $this->phone =  $phone;
                 $this->village =  $village;
                 $this->ten_cell_leder =  $ten_cell_leder;
                 $this->patient_status =  $patient_status;
@@ -294,7 +296,85 @@ class patient {
   </div>
     <?php  } ?>
 </div>
+
+<!--follow up-->
+<h3 id="addexamerec">Follow Up(s) <a href="#s" class="btn btn-info btn-xs addfol" id="<?php echo $this->patient_id ?>"><i class="fa fa-plus"></i> </a></h3> 
+<?php 
+$query = mysql_query("SELECT * FROM folow_up WHERE patient_id='{$this->patient_id}'");
+if(mysql_num_rows($query) == 0){
+    echo "<strong>No follow up done before</strong>";
+}else{
+    ?>
+<div class="row">
+    <div class="col-md-4">Total Follow Ups Done To Date</div><div class="col-md-8 text-left"><b><?php echo mysql_num_rows($query); ?></b></div>
+</div>
+
 <?php
+$datequery = mysql_query("SELECT * FROM folow_up WHERE patient_id='{$this->patient_id}' ORDER BY last_contact DESC LIMIT 1");
+while ($row2 = mysql_fetch_array($datequery)) {
+    echo "<div class='row'>";
+     echo "<div class='col-md-4'>Date Of Last Follow UP</div><div class='col-md-8 text-left'><b>".date("j,M Y",  strtotime($row2['last_contact']))."</b></div>";
+     echo "</div>";
+     echo "<div class='row'>
+    <div class='col-md-4'>Last Follow Up Status</div><div class='col-md-8 text-left'><b>{$row2['status']}</b></div>
+</div>";
+}
+echo "<hr>";
+?>
+<div class="accordion" id="accordion4">
+    <?php 
+    $query1 = mysql_query("SELECT * FROM folow_up WHERE patient_id='{$this->patient_id}'");
+    $count= 0;
+    while ($row1 = mysql_fetch_array($query1)) {
+        $count++;
+    ?>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion4" href="#collapsee<?php echo $count ?>">
+          <strong>Follow Up Record #<?php echo $count ?>  <i class="fa fa-angle-double-down fa-lg pull-left"></i></strong>
+      </a><button class="btn btn-xs editExam" id="<?php echo $row1['id'] ?>"><i class="fa fa-pencil"></i></button>
+    </div>
+    <div id="collapsee<?php echo $count ?>" class="accordion-body collapse">
+      <div class="accordion-inner">
+          <table class="table table-bordered table-condensed table-hover">
+        <?php 
+        $queryy = mysql_query("SELECT * FROM folow_up WHERE id = '{$row1['id']}'");
+        while ($row3 = mysql_fetch_array($queryy)) {
+        ?>
+              <tr>
+                  <td>Follow Up Date</td>
+                  <td><?php echo $row3['last_contact'] ?></td>
+              </tr>
+              <tr>
+                  <td>Patient Status</td>
+                  <td><?php echo $row3['status'] ?></td>
+              </tr>
+              <tr class="deathcause">
+                  <td>Cause Of Death</td>
+                  <td class="cuase"><?php echo $row3['cause_of_death'] ?></td>
+              <script>
+                  $(document).ready(function(){
+                      $("td.cause").each(function(){
+                         $(this).hide().text("nonon") 
+                            
+                      });
+                  });
+              </script>
+              </tr>
+              <tr class="deathcause">
+                  <td>Follow Up Done By</td>
+                  <td><?php echo $row3['dr_name'] ?></td>
+              </tr>
+              <?php } ?>
+          </table>
+      </div>
+    </div>
+  </div>
+    <?php  } ?>
+</div>
+<?php
+
+}
      }
 
      function editPatient(){
@@ -346,7 +426,7 @@ class patient {
    <div class="form-group">
     <label for="phone_number" class="col-md-2 control-label">Phone Number</label>
     <div class="col-md-4">
-      <input type="text" name="phone_number" id="phone_number" class="form-control validate[required]"  placeholder="Phone Number">
+      <input type="text" name="phone_number" id="phone_number" class="form-control validate[required]"  value="<?php echo $this->phone; ?>">
     </div>
   </div>
  <!--Occupation-->

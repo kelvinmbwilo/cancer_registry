@@ -19,7 +19,6 @@ $(document).ready(function(){
              $("#submenus").html("");
              $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
              $("#maincontents").load("includes/forms.php?page=userRegistration",function(){
-                 
                  $("#Birth_Date").datepicker({
                     changeMonth: true,
                     changeYear: true,
@@ -70,7 +69,12 @@ $(document).ready(function(){
                            $("#submitbtn1").click(function(){
                             $("#submit").hide("slow");$("#submit1").hide("slow");
                             $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait To Add Another Tumor Record...</span>");    
-                            $("form").hide();
+                                var myCheckboxes = new Array();
+                                $("input:checked").each(function() {
+                                   myCheckboxes.push($(this).val());
+                                });
+                               $("form").hide();
+                            
                                $.ajax({
                                type: "POST",
                                url: "includes/form_processor.php?page=tumor_reg",
@@ -86,7 +90,8 @@ $(document).ready(function(){
                                    hosptal:$("#Hospital").val(),
                                    path_lab_no:$("#Path_lab_no").val(),
                                    unit:$("#Unit").val(),
-                                   case_no:$("#Case_no").val()
+                                   case_no:$("#Case_no").val(),
+                                   treat:myCheckboxes
                                }, 
                                cache: false,
                                success: function(){
@@ -100,7 +105,11 @@ $(document).ready(function(){
                         });//end of adding tumor
                            
                             $("#submitbtn").click(function(){
-                            $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait ...</span>");    
+                            $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait ...</span>");  
+                            var myCheckboxes = new Array();
+                                $("input:checked").each(function() {
+                                   myCheckboxes.push($(this).val());
+                                });
                             $.ajax({
                                type: "POST",
                                url: "includes/form_processor.php?page=tumor_reg",
@@ -116,7 +125,8 @@ $(document).ready(function(){
                                    hosptal:$("#Hospital").val(),
                                    path_lab_no:$("#Path_lab_no").val(),
                                    unit:$("#Unit").val(),
-                                   case_no:$("#Case_no").val()
+                                   case_no:$("#Case_no").val(),
+                                   treat:myCheckboxes
                                }, 
                                cache: false,
 
@@ -193,7 +203,10 @@ $(document).ready(function(){
              $("#submenus").html("");
              $("#maincontents").html("<img src='img/loading.gif' /> Loading Patient List Please Wait...");
              $("#maincontents").load("includes/processes.php?page=list_patient",function(){
-                 $("#myTable").dataTable();
+                 $("#myTable").dataTable({
+                    "fnDrawCallback": function( oSettings ) {
+                       // alert( 'DataTables has redrawn the table' );
+                      
                  $(".moreinfo").click(function(){
                      var id1 = $(this).attr("id");
                      $("#maincontents").html("<img src='img/loading.gif' /> Loading Patient Information Please Wait...");
@@ -208,7 +221,7 @@ $(document).ready(function(){
                                    dateFormat:"yy-mm-dd"
                                });
                                 $("#submitbtn").click(function(){
-                                    var id =  $("#Patient_id").val(),fname=$("#First_Name").val(),mname=$("#Middle_Name").val(),lname=$("#Last_Name").val(),sex=$("#gender").val();
+                                    fname=$("#First_Name").val(),mname=$("#Middle_Name").val(),lname=$("#Last_Name").val(),sex=$("#gender").val();
                                     var dob =$("#Birth_Date").val(),tribe=$("#tribe").val(),Occupation = $("#Occupation").val(),country=$("#nationality").val(),region=$("#region").val();
                                     var district = $("#district").val(),ward=$("#ward").val(),vill = $("#village").val(),ten =$("#Cell_leader").val(),phon=$("#phone_number").val();
                                     $("#maincontents").html("<img src='img/loading.gif' /> Submitting Patient Information Please Wait...");    
@@ -273,6 +286,7 @@ $(document).ready(function(){
                                        path_lab_no:path_lab_no,
                                        unit:unit,
                                        case_no:case_no
+                                       
                                    }, 
                                    cache: false,
 
@@ -329,6 +343,10 @@ $(document).ready(function(){
                                     var icd=$("#ICD_10").val(),icc=$("#ICCC_code").val(),hosptal=$("#Hospital").val(),path_lab_no=$("#Path_lab_no").val(),unit=$("#Unit").val(),case_no=$("#Case_no").val();
                                     $("#submit").hide("slow");$("#submit1").hide("slow");
                                     $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait To Add Another Tumor Record...</span>");    
+                                    var myCheckboxes = new Array();
+                                    $("input:checked").each(function() {
+                                       myCheckboxes.push($(this).val());
+                                    });
                                     $("form").hide();
                                        $.ajax({
                                        type: "POST",
@@ -345,7 +363,8 @@ $(document).ready(function(){
                                             hosptal:hosptal,
                                             path_lab_no:path_lab_no,
                                             unit:unit,
-                                            case_no:case_no
+                                            case_no:case_no,
+                                            treat:myCheckboxes
                                        }, 
                                        cache: false,
                                        success: function(msg){
@@ -362,7 +381,11 @@ $(document).ready(function(){
                                     var icd=$("#ICD_10").val(),icc=$("#ICCC_code").val(),hosptal=$("#Hospital").val(),path_lab_no=$("#Path_lab_no").val(),unit=$("#Unit").val(),case_no=$("#Case_no").val();
                                     $("#submit").hide("slow");$("#submit1").hide("slow");
                                     $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait To Add Another Tumor Record...</span>");    
-                                    $("form").hide();
+                                    var myCheckboxes = new Array();
+                                    $("input:checked").each(function() {
+                                       myCheckboxes.push($(this).val());
+                                    });
+                                        $("form").hide();
                                        $.ajax({
                                        type: "POST",
                                        url: "includes/form_processor.php?page=tumor_reg",
@@ -378,7 +401,8 @@ $(document).ready(function(){
                                             hosptal:hosptal,
                                             path_lab_no:path_lab_no,
                                             unit:unit,
-                                            case_no:case_no
+                                            case_no:case_no,
+                                            treat:myCheckboxes
                                        }, 
                                        cache: false,
                                        success: function(msg){
@@ -441,8 +465,63 @@ $(document).ready(function(){
                                     });//end of adding examination
                             });
                         });
+                    
+                         $(".addfol").click(function(){
+                            var id1=$(this).attr("id");
+                            $("#maincontents").html("<img src='img/loading.gif' /> Loading Patient Information Please Wait...");
+                            $("#maincontents").load("includes/forms.php?page=follow_up",function(){
+                                $("#last_date").datepicker({
+                                   changeMonth: true,
+                                   changeYear: true,
+                                   dateFormat:"yy-mm-dd"
+                               });
+                           
+                            $("#followbtn").click(function(){
+                                    var lastc = $("#last_date").val(), status=$("#status").val(), deathca=$("#deathcause").val();
+                                    var drname=$("#drname").val(); 
+                                    $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait...</span>");    
+                                    $("form").hide();
+                                       $.ajax({
+                                       type: "POST",
+                                       url: "includes/form_processor.php?page=addfoloup",
+                                       data: {
+                                            patient_id : id1,
+                                            last_contact : lastc,
+                                            status:status,
+                                            cause_of_death:deathca,
+                                            dr_name:drname
+                                       }, 
+                                       cache: false,
+                                       success: function(){
+                                          $("#listpat").trigger("click"); 
+                                       } 
+                                    });     
+                                });//end of adding examination
+                            });
+                         });
                      });
                  });
+             
+             $(".deletepat").click(function(){
+                 var id = $(this).attr("id");
+                 $(".deletepat").show("slow").parent().parent().find("span").remove();
+                var btn = $(this).parent().parent();
+                $(this).hide("slow").parent().append("<span><br>Are You Sure <br /> <a href='#s' id='yes'><i class='fa fa-check'></i> Yes</a> <a href='#s' id='no'> <i class='fa fa-times'></i> No</a></span>");
+                $("#no").click(function(){
+                    $(this).parent().parent().find(".deletepat").show("slow");
+                    $(this).parent().parent().find("span").remove();
+                });
+                $("#yes").click(function(){
+                    $(this).parent().html("<br><i class='fa fa-spinner fa-spin'></i>deleting...");
+                    alert(id);
+                    $.post("includes/form_processor.php?page=deletepat",{id:id},function(data){
+                      alert(data);
+                      btn.hide("slow").next("hr").hide("slow");
+                   });
+                });
+})
+             }
+                  } );
              });
          });
      
@@ -476,7 +555,7 @@ $(document).ready(function(){
              $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
              
          });
-         $("#registerpatient").trigger("click");
+         $("#listpat").trigger("click");
         });
       
     });
