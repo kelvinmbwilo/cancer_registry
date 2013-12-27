@@ -262,17 +262,18 @@ if(isset($_GET['page'])){
 <h4>Report Specific Filters</h4>
 <div class="container">
     <div class="col-md-2"><?php echo form::regionalDropWithDefault(); ?></div>
-    <div class="col-md-2"><?php echo form::districtDropdown("all"); ?></div>
-    <div class="col-md-2"><?php echo form::genderDropdown(""); ?></div>
-    <div class="col-md-2"><?php echo form::generalDropdown("","Age Range",array("All Ages","Write Age","2","3","4","5","6","7","8","9","10")); ?></div>
+    <div class="col-md-2" id="districtarea"><?php echo form::districtDropdown("all"); ?></div>
+    <?php //form::districdropscript(); ?>
+    <div class="col-md-2"><?php echo form::generalDropdown("sex","Sex",array("All Sex","Female","Male")); ?></div>
+    <div class="col-md-2"><?php echo form::generalDropdown("age","Age Range",array("All Ages","Write Age","2","3","4","5","6","7","8","9","10")); ?></div>
 </div>
 <div class="container">
     
     <div class="col-md-4">Select Range 
-        From: <input type="text" id="from" name="from" class="form-control"/>
+        From: <input type="text" id="from" name="from" class="form-control" placeholder="Starting Date"/>
         
     </div>
-    <div class="col-md-4">to:  <input type="text" id="to" name="to" class="form-control" placeholder="start date"/></div>
+    <div class="col-md-4">to:  <input type="text" id="to" name="to" class="form-control" placeholder="End Date"/></div>
 </div>
 
 <div class="btn btn-info btn-sm tog" style="margin: 10px" id="toggleadv">Advanced Filters</div>
@@ -286,7 +287,7 @@ if(isset($_GET['page'])){
           $arr["{$row['id']}"] = $row['value'];
       }
      // $arr = array("Death certificate only","Histology of metastasis","Clinical only ","Cytology / Haematology","Specific tumour markers","Histology of primary","Clinical investigations","Unknown");
-      echo form::generalDropdown("Basis_Diagnosis", "Basis Of Diagnosis", $arr, ""); 
+      echo form::generalDropdown2("Basis_Diagnosis", "Basis Of Diagnosis", $arr, ""); 
       ?>
     </div>
     <div class="col-md-2">
@@ -297,13 +298,21 @@ if(isset($_GET['page'])){
           $arr1["{$row['id']}"] = $row['value'];
       }
      // $arr = array("Death certificate only","Histology of metastasis","Clinical only ","Cytology / Haematology","Specific tumour markers","Histology of primary","Clinical investigations","Unknown");
-      echo form::generalDropdown("Topography", "Topography", $arr1, ""); 
+      echo form::generalDropdown2("Topography", "Topography", $arr1, ""); 
       ?>
     </div>
     <div class="col-md-2">
-        <?php echo form::generalDropdown("","Morphology",array("All Ages","Write Age","2","3","4","5","6","7","8","9","10")); ?>
+        <?php 
+      $query2 = mysql_query("SELECT DISTINCT COL_3,COL_4 FROM TABLE_18");
+      $arr2 = array();
+      while ($row = mysql_fetch_array($query2)) {
+          $arr2["{$row['COL_3']}"] = $row['COL_4'];
+      }
+     // $arr = array("Death certificate only","Histology of metastasis","Clinical only ","Cytology / Haematology","Specific tumour markers","Histology of primary","Clinical investigations","Unknown");
+      echo form::generalDropdown1("Morphology", "Morphology", $arr2, ""); 
+      ?>
     </div>
-    <div class="col-md-3"><?php echo form::generalDropdown("","Behevior",array("All Ages","Write Age","2","3","4","5","6","7","8","9","10")); ?></div>
+    
 </div>
 <div class="container" style="padding-top: 10px">
     <div class="col-md-2"><?php 
@@ -312,30 +321,165 @@ if(isset($_GET['page'])){
       while ($row = mysql_fetch_array($query)) {
           $arr["{$row['code']}"] = $row['stage'];
       }
-      echo form::generalDropdown("ICD_10", "Stage", $arr, ""); 
+      echo form::generalDropdown2("Stage", "Stage", $arr, ""); 
       ?></div>
-    <div class="col-md-2"><?php echo form::generalDropdown("","Treatment",array("All","Surgery","Radiotherapy","Chemotherapy","Hormone therapy","Other")); ?></div>
-    <div class="col-md-3"><?php echo form::generalDropdown("","Death Cause",array("All","This cancer","Other cause")); ?></div>
-    <div class="col-md-3"><?php echo form::generalDropdown("","Age Range",array("All Ages","Write Age","2","3","4","5","6","7","8","9","10")); ?></div>
+    <div class="col-md-2"><?php echo form::generalDropdown2("Treatment","Treatment",array("All","Surgery","Radiotherapy","Chemotherapy","Hormone therapy","Other")); ?></div>
+    <div class="col-md-3" id="behaviorarea"><?php echo form::generalDropdown1("Behevior","Behevior",array()); ?></div>
+    <script>
+    $(document).ready(function(){
+       
+     })
+    </script>
 </div>
 
 </div>
 <div class="container" style="padding-top: 15px">
     <div class="col-md-2"></div>
-    <div class="col-md-2"><button type="button" class="btn btn-info">View</button></div>
     <div class="col-md-2"></div>
+    
     <div class="col-md-5">
-        <p>Export</p>
+<!--        <p>Export</p>
         <button type="button" class="btn btn-default btn-xs">XLS</button>
         <button type="button" class="btn btn-default btn-xs">PDF</button>
-        <button type="button" class="btn btn-default btn-xs">DOC</button>
+        <button type="button" class="btn btn-default btn-xs">DOC</button>-->
     </div>
+    <div class="col-md-2 btn btn-info btn-sm" id="savereport" ><i class="fa fa-save-o"></i> Save Report</div>
+    <div class="col-md-1"  ></div>
+</div>
+<div class="container" style="padding-top: 15px" id="savereportform">
+    <div class="col-md-2"></div>
     
+    
+    <div class="col-md-4">
+<!--        <p>Export</p>
+        <button type="button" class="btn btn-default btn-xs">XLS</button>
+        <button type="button" class="btn btn-default btn-xs">PDF</button>
+        <button type="button" class="btn btn-default btn-xs">DOC</button>-->
+    </div>
+    <div class="col-md-4" >
+    <input type="text" class="form-control" id="reporttitle" placeholder="Report Title">
+    </div>
+  
+    <div class="col-md-1 btn btn-info btn-sm" id="savereport1" >Save</div>
+    <div class="col-md-1" id="dumb"></div>
 </div>
 
+<div class="container" id="chatmenus" style="padding: 10px">
+    <div class="col-md-2 btn btn-default" id="tablechat">Table</div>
+    <div class="col-md-1"></div>
+    <div class="col-md-2 btn btn-default" id="linechat">Line Chart</div>
+    <div class="col-md-1"></div>
+    <div class="col-md-2 btn btn-default" id="barchat">Bar Chart</div>
+    <div class="col-md-1"></div>
+    <div class="col-md-2 btn btn-default" id="piechat">Pie Chat</div>
+</div>
+<div class="container" id="statdata">
+   
+</div>
 
-<div id="container" style="width:90%; height:400px;">afdsaf</div>
         <?php
+    }
+    
+    if($_GET['page'] == "savedreport"){
+        ?>
+        <div class="container" style="padding-top: 10px">
+    <div class="col-md-6"><?php 
+      $query = mysql_query("SELECT * FROM reports");
+      $arr = array();
+      while ($row = mysql_fetch_array($query)) {
+          $arr["{$row['id']}"] = $row['name'];
+      }
+      echo form::generalDropdown("Reports", "Select Report", $arr, ""); 
+      ?></div>
+    
+    <script>
+    $(document).ready(function(){
+        $("#chatmenus").hide();
+       $("#Reports").change(function(){
+          $("#chatmenus").show("slow");
+          $("#reportarea").load("includes/processes.php?page=procsavedreport",{title:$(this).val()},function(data){
+            
+             
+          });
+        });
+     });
+    </script>
+</div>
+<div class="container" id="chatmenus" style="padding: 10px">
+    <div class="col-md-2 btn btn-default" id="tablechat">Table</div>
+    <div class="col-md-1"></div>
+    <div class="col-md-2 btn btn-default" id="linechat">Line Chart</div>
+    <div class="col-md-1"></div>
+    <div class="col-md-2 btn btn-default" id="barchat">Bar Chart</div>
+    <div class="col-md-1"></div>
+    <div class="col-md-2 btn btn-default" id="piechat">Pie Chat</div>
+</div>
+<div class="container" style="padding-top: 10px" id="reportarea">
+    
+</div>
+<?php
+    }
+    
+    if($_GET['page'] == "procsavedreport"){
+        $query = mysql_query("SELECT * FROM reports WHERE name = '{$_POST['title']}'");
+        $data = "";
+        while ($row = mysql_fetch_array($query)) {
+            $data .="{reg:'{$row['region']}',";
+            $data .="dist:'{$row['district']}',";
+            $data .="gend:'{$row['sex']}',";
+            $data .="age:'{$row['age']}',";
+            $data .="from:'{$row['fromm']}',";
+            $data .="to:'{$row['too']}',";
+            $data .="diagno:'{$row['basis']}',";
+            $data .="topo:'{$row['topograph']}',";
+            $data .="morpho:'{$row['morphology']}',";
+            $data .="stage:'{$row['stage']}',";
+            $data .="treat:'{$row['treat']}',";
+            $data .="behav:'{$row['behavior']}'}";
+?>
+<script>
+    $("#tablechat").unbind("click").click(function(){
+                $("#chatmenus").find("div.btn").removeClass("btn-warning");
+                $(this).addClass("btn-warning");
+                    $("#reportarea").html("<i class='fa fa-spinner fa-spin fa-4x'></i>");
+                     $("#reportarea").load("statistics/more.php?page=table",<?php echo $data ?>,function(){
+
+                 });
+                });
+
+                $("#barchat").unbind("click").click(function(){
+                $("#chatmenus").find("div.btn").removeClass("btn-warning");
+                $(this).addClass("btn-warning");
+                    $("#reportarea").html("<i class='fa fa-spinner fa-spin fa-4x'></i>");
+                    $("#reportarea").load("statistics/more.php?page=bar",<?php echo $data ?>,function(){
+
+                 });
+                });
+
+                $("#piechat").unbind("click").click(function(){
+                $("#chatmenus").find("div.btn").removeClass("btn-warning");
+                $(this).addClass("btn-warning");
+                    $("#reportarea").html("<i class='fa fa-spinner fa-spin fa-4x'></i>");
+                    $("#reportarea").load("statistics/more.php?page=pie",<?php echo $data ?>,function(){
+
+                 });
+                });
+
+                $("#linechat").unbind("click").click(function(){
+                $("#chatmenus").find("div.btn").removeClass("btn-warning");
+                $(this).addClass("btn-warning");
+                    $("#reportarea").html("<i class='fa fa-spinner fa-spin fa-4x'></i>");
+                     $("#reportarea").load("statistics/more.php?page=line",<?php echo $data ?>,function(){
+
+                 });
+                });
+            //trigger table chat by default
+            $("#tablechat").trigger("click");
+    
+    </script>
+<?php
+                 
+        }
     }
 }
 ?>

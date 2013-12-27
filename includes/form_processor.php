@@ -99,5 +99,19 @@ if(isset($_GET['page'])){
         echo "DELETE FROM patient WHERE id='{$_POST['id']}'";
         $query = mysql_query("DELETE FROM patient WHERE id='{$_POST['id']}'") or die(mysql_error());
     }
+    
+    if($_GET['page'] == "behavior"){
+      $query2 = mysql_query("SELECT * FROM TABLE_18 WHERE COL_3='{$_POST['morp']}'") or die(mysql_error());
+      $arr2 = array();
+      while ($row = mysql_fetch_array($query2)) {
+          $arr2["{$row['COL_5']}"] = $row['COL_6'];
+      }
+     // $arr = array("Death certificate only","Histology of metastasis","Clinical only ","Cytology / Haematology","Specific tumour markers","Histology of primary","Clinical investigations","Unknown");
+      echo form::generalDropdown1("Behevior", "Behevior", $arr2, ""); 
+      
+    }
+    if($_GET['page'] == "savereport"){
+       
+    }
 }
 ?>

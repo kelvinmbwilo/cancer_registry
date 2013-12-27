@@ -55,7 +55,12 @@
         <script type="text/javascript" src="js/setup.js"></script>
         <script type="text/javascript" src="js/extra.js"></script>  
         
-        <script type="text/javascript" src="js/statistics.js"></script>  
+        <script type="text/javascript" src="js/statistics/region.js"></script> 
+        <script type="text/javascript" src="js/statistics/district.js"></script> 
+        <script type="text/javascript" src="js/statistics/gender.js"></script> 
+        <script type="text/javascript" src="js/statistics/age.js"></script> 
+        <script type="text/javascript" src="js/statistics/time.js"></script> 
+        <script type="text/javascript" src="js/statistics/more.js"></script> 
         
 
         

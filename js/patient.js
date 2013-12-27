@@ -22,6 +22,7 @@ $(document).ready(function(){
                  $("#Birth_Date").datepicker({
                     changeMonth: true,
                     changeYear: true,
+                    yearRange: "1900:2017",
                     dateFormat:"yy-mm-dd"
                 });
                  $("#submitbtn").click(function(){
@@ -49,7 +50,7 @@ $(document).ready(function(){
                         ward:ward,
                         village:vill,
                         ten_cell_leder:ten,
-                        patient_status:""
+                        patient_status:$.now()
                     }, 
                     cache: false,
 
@@ -59,7 +60,12 @@ $(document).ready(function(){
                     success: function(){
                         $("#maincontents").html("<img src='img/loading.gif' />Patient Registered Successfull Loading Tumor Record form...");
                         $("#maincontents").load("includes/forms.php?page=Tumor",{id:id},function(){
-                            
+                            $("#Morphology").change(function(){
+                                var morp = $(this).val();
+                                $("#behaviorarea").html("<i class='fa fa-spinner fa-spin'></i>");
+                                $("#behaviorarea").load("includes/form_processor.php?page=behavior",{morp:morp},function(){
+                                });
+                             });
                             $("#Incidence_Date").datepicker({
                                 changeMonth: true,
                                 changeYear: true,
@@ -67,6 +73,9 @@ $(document).ready(function(){
                             });
                            
                            $("#submitbtn1").click(function(){
+//                                 var id =  $("#Patient_id").val(),fname=$("#First_Name").val(),mname=$("#Middle_Name").val(),lname=$("#Last_Name").val(),sex=$("#gender").val();
+//                                var dob =$("#Birth_Date").val(),tribe=$("#tribe").val(),Occupation = $("#Occupation").val(),country=$("#nationality").val(),region=$("#region").val();
+//                                var district = $("#district").val(),ward=$("#ward").val(),vill = $("#village").val(),ten =$("#Cell_leader").val(),phon=$("#phone_number").val();
                             $("#submit").hide("slow");$("#submit1").hide("slow");
                             $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait To Add Another Tumor Record...</span>");    
                                 var myCheckboxes = new Array();
@@ -82,7 +91,7 @@ $(document).ready(function(){
                                    patient_id : id,
                                    topograph : $("#Topography").val(),
                                    morphology:$("#Morphology").val(),
-                                   behavior:$("#Behavior").val(),
+                                   behavior:$("#Behevior").val(),
                                    incidance_date:$("#Incidence_Date").val(),
                                    basis_diagnosis:$("#Basis_Diagnosis").val(),
                                    ICD_10:$("#ICD_10").val(),
@@ -94,7 +103,7 @@ $(document).ready(function(){
                                    treat:myCheckboxes
                                }, 
                                cache: false,
-                               success: function(){
+                               success: function(data){
                                     $("input, textarea, select").val("");
                                     $("#submit").show("slow");$("#submit1").show("slow");
                                     $("form").show("slow");
@@ -117,7 +126,7 @@ $(document).ready(function(){
                                    patient_id : id,
                                    topograph : $("#Topography").val(),
                                    morphology:$("#Morphology").val(),
-                                   behavior:$("#Behavior").val(),
+                                   behavior:$("#Behevior").val(),
                                    incidance_date:$("#Incidence_Date").val(),
                                    basis_diagnosis:$("#Basis_Diagnosis").val(),
                                    ICD_10:$("#ICD_10").val(),
@@ -133,7 +142,8 @@ $(document).ready(function(){
                                ////////////////////////////////////////////////////////////////
                                ///////////////////Diagnosis Registration ///////////////////////////
                                ////////////////////////////////////////////////////////////////
-                               success: function(){
+                               success: function(data){
+                                   alert(data);
                                     $("#loader").remove();
                                     $("#maincontents").html("<img src='img/loading.gif' />Tumor Record added Successfull Loading Examination form...");
                                     $("#maincontents").load("includes/forms.php?page=Examination",{id:id},function(){
@@ -218,6 +228,7 @@ $(document).ready(function(){
                                 $("#Birth_Date").datepicker({
                                    changeMonth: true,
                                    changeYear: true,
+                                   yearRange: "1900:2017",
                                    dateFormat:"yy-mm-dd"
                                });
                                 $("#submitbtn").click(function(){

@@ -78,8 +78,8 @@ if(isset($_GET['page'])){
     if($_GET['page'] == "report"){
         ?>
         <ul class="nav nav-tabs nav-stacked">
-            <li class="active" id="communityReport"><a href="#" ><i class="fa fa-group fa-lg"></i> View Community Report <i class="fa fa-chevron-right pull-right"></i></a></li>
-            <li><a href="#"><i class="fa fa-file-text fa-lg"></i> View Normal Report <i class="fa fa-chevron-right pull-right"></i></a></li>
+            <li class="active" id="communityReport"><a href="#" ><i class="fa fa-group fa-lg"></i> View  Report <i class="fa fa-chevron-right pull-right"></i></a></li>
+            <li><a href="#" id="savedrep"><i class="fa fa-file-text fa-lg"></i> View Saved Report <i class="fa fa-chevron-right pull-right"></i></a></li>
 <!--            <li><a href="#"><i class="fa fa-home fa-lg"></i> Manage Occupation <i class="fa fa-chevron-right pull-right"></i></a></li>
             <li><a href="#"><i class="fa fa-file-text fa-lg"></i> Report Type <i class="fa fa-chevron-right pull-right"></i></a></li>-->
           </ul>

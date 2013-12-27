@@ -184,10 +184,37 @@ class form {
         return $str;
     }
     
+    static function generalDropdown1($name,$default,$array,$selected){
+        $str = "<select name='$name' id='$name' class='form-control'echo >";
+        $str .= "<option selected='selected'>$default</option>";
+        foreach ($array as $key => $value) {
+            if($value == $selected)
+                $str .= "<option value='{$key}' selected='selected'>$value</option>";
+            else 
+                $str .= "<option value='{$key}'>$value</option>";
+        }
+        //$str .= "<option>Option1</option><option>Option2</option><option>Option3</option><option>Option4</option><option>Option5</option>";
+        $str .= "</select>";
+        return $str;
+    }
+    
+    static function generalDropdown2($name,$default,$array,$selected){
+        $str = "<select name='$name' id='$name' class='form-control'echo >";
+        $str .= "<option selected='selected'>$default</option>";
+        foreach ($array as $value) {
+            if($value == $selected)
+                $str .= "<option value='{$value}' selected='selected'>$value</option>";
+            else 
+                $str .= "<option value='{$value}'>$value</option>";
+        }
+        //$str .= "<option>Option1</option><option>Option2</option><option>Option3</option><option>Option4</option><option>Option5</option>";
+        $str .= "</select>";
+        return $str;
+    }
     
     static function regionalDropWithDefault($selected){
         $query = mysql_query("SELECT * FROM regions");
-        $str = "<select name='region' id='region' class='form-control'>";
+        $str = "<select name='region' id='region' class='form-control' onChange='districtDropdown(this)'>";
         $str .= "<option selected='selected'>Region</option>";
         while ($row = mysql_fetch_array($query)) {
             extract ($row);
@@ -201,6 +228,24 @@ class form {
         return $str;
     }
     
+    static function districdropscript(){
+       echo "<script>";
+       echo 'function districtDropdown(ids){';
+       echo 'var region = ids.value;';
+       echo 'str = "<select name=\'district\' id=\'district\'>";';
+       $query = mysql_query("SELECT * FROM regions");
+       while ($row = mysql_fetch_array($query)) {
+         echo 'if(region == "'.$row['region'].'"){';
+         $query1 = mysql_query("SELECT * FROM districts WHERE region_id={$row['id']}");
+            while ($row1 = mysql_fetch_array($query1)) {
+                echo 'str += "<option>'.$row1['district'].'</option>";';
+            }
+       }
+       echo 'str += "</select>";';
+       echo 'document.getElementById("districtarea").innerHTML=str;';
+       echo "</script>";
+       
+    }
     static function regionalMultWithDefault($selected){
         $query = mysql_query("SELECT * FROM regions");
         $str = "<select name='region' multiple='multiple' size='5'>";

@@ -238,15 +238,28 @@ if(isset($_GET['page'])){
   <div class="form-group">
     <label for="Morphology" class="col-md-2 control-label">Morphology</label>
     <div class="col-md-4">
-      <input type="text" name="Morphology" id="Morphology" class="form-control validate[required]"  placeholder="Morphology">
+      <?php 
+      $query2 = mysql_query("SELECT DISTINCT COL_3,COL_4 FROM TABLE_18");
+      $arr2 = array();
+      while ($row = mysql_fetch_array($query2)) {
+          $arr2["{$row['COL_3']}"] = $row['COL_4'];
+      }
+     // $arr = array("Death certificate only","Histology of metastasis","Clinical only ","Cytology / Haematology","Specific tumour markers","Histology of primary","Clinical investigations","Unknown");
+      echo form::generalDropdown1("Morphology", "Morphology", $arr2, ""); 
+      ?>
     </div>
   </div>
  
   <!--Behavior-->
   <div class="form-group">
     <label for="Middle_Name" class="col-md-2 control-label">Behavior</label>
-    <div class="col-md-4">
-      <input type="text" name="Behavior" id="Behavior" class="form-control validate[required]"  placeholder="Behavior">
+    <div class="col-md-4" id="behaviorarea">
+      <?php echo form::generalDropdown1("Behevior","Behevior",array()); ?></div>
+    <script>
+    $(document).ready(function(){
+        
+     })
+    </script>
     </div>
   </div>
     
