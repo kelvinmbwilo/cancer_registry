@@ -138,7 +138,7 @@ class tumor {
 <table class="table table-bordered table-hover table-responsive">
     <tr>
         <th>Topograph</th><th>Morphology</th><th>behavior</th>
-        <th>incidance_date</th><th>basis_diagnosis</th><th>ICD_10</th><th>ICCC_code</th>
+        <th>incidance_date</th><th>basis_diagnosis</th><th>Stage</th>
     </tr>
     <tr>
         <td><?php echo $this->topograph ?></td>
@@ -147,7 +147,6 @@ class tumor {
         <td><?php echo date("j,M Y",  strtotime($this->incidance_date)) ?></td>
         <td><?php echo $this->basis_diagnosis ?></td>
         <td><?php echo $this->ICD_10 ?></td>
-        <td><?php echo $this->ICCC_code ?></td>
         
         
     </tr>
@@ -224,7 +223,7 @@ class tumor {
 
                <!--ICD-10-->
                <div class="form-group">
-                <label for="ICD_10" class="col-md-2 control-label">ICD-10</label>
+                <label for="ICD_10" class="col-md-2 control-label">Stage</label>
                 <div class="col-md-4">
                   <input type="text" name="ICD_10" id="ICD_10" class="form-control validate[required]"  value="<?php echo $this->ICD_10 ?>">
                 </div>
@@ -234,7 +233,7 @@ class tumor {
                <div class="form-group">
                 <label for="ICCC_code" class="col-md-2 control-label">ICCC code</label>
                 <div class="col-md-4">
-                  <input type="text" name="ICCC_code" id="ICCC_code" class="form-control validate[required]"  value="<?php echo $this->ICCC_code ?>">
+                  <input type="hidden" name="ICCC_code" id="ICCC_code" class="form-control validate[required]"  value="<?php echo $this->ICCC_code ?>">
                 </div>
               </div>
 

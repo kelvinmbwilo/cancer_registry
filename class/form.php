@@ -214,8 +214,24 @@ class form {
     
     static function regionalDropWithDefault($selected){
         $query = mysql_query("SELECT * FROM regions");
-        $str = "<select name='region' id='region' class='form-control' onChange='districtDropdown(this)'>";
+        $str = "<select name='region' id='region' class='form-control validate[required]' onChange='districtDropdown(this)'>";
         $str .= "<option selected='selected'>Region</option>";
+        while ($row = mysql_fetch_array($query)) {
+            extract ($row);
+            if($region == $selected){
+              $str .= "<option selected='selected'>$region</option>";  
+            }else{
+               $str .= "<option>$region</option>"; 
+            }
+        }
+        $str .= "</select>";
+        return $str;
+    }
+    
+    static function regionalDropWithDefault1($selected){
+        $query = mysql_query("SELECT * FROM regions");
+        $str = "<select name='region' id='region' class='form-control validate[required]' onChange='districtDropdown(this)'>";
+        $str .= "<option selected='selected' disabled='disabled'>Region</option>";
         while ($row = mysql_fetch_array($query)) {
             extract ($row);
             if($region == $selected){
@@ -270,8 +286,38 @@ class form {
         $query = mysql_query("SELECT * FROM regions WHERE region='$regi'");
         $str = "";
         if($regi == "all"){
-            $str.= "<select name='district' id='district' class='form-control'>";
+            $str.= "<select name='district' id='district' class='form-control validate[required]'>";
             $str .= "<option selected='selected'>District</option>";
+            $query1 = mysql_query("SELECT * FROM districts ORDER BY district");
+            while ($row1 = mysql_fetch_array($query1)) {
+                extract($row1);
+                
+                $str .=($district == $selected)?"<option selected='selected'>$district</option>":"<option>$district</option>";
+            }
+            $str .="</select>";
+        }else{
+        while ($row = mysql_fetch_array($query)) {
+            extract($row);
+            if($region == $regi){
+                $str.= "<select name='district' id='district' class='form-control'>";
+                $query1 = mysql_query("SELECT * FROM districts WHERE region_id=$id");
+                while ($row1 = mysql_fetch_array($query1)) {
+                    extract($row1);
+                    $str .= "<option>$district</option>";
+                }
+                $str .="</select>";
+            }
+        }
+        }
+        return $str;
+    }
+    
+    static function districtDropdown1($regi,$selected){
+        $query = mysql_query("SELECT * FROM regions WHERE region='$regi'");
+        $str = "";
+        if($regi == "all"){
+            $str.= "<select name='district' id='district' class='form-control validate[required]'>";
+            $str .= "<option selected='selected' disabled='disabled'>District</option>";
             $query1 = mysql_query("SELECT * FROM districts ORDER BY district");
             while ($row1 = mysql_fetch_array($query1)) {
                 extract($row1);
@@ -358,7 +404,7 @@ class form {
     
     static function countryList(){
         ?>
-        <select name="nationality" id="nationality" class="form-control">
+        <select name="nationality" id="nationality" class="form-control validate[required]">
         <option value="United States">United States</option>
         <option value="United Kingdom">United Kingdom</option>
         <option value="Afghanistan">Afghanistan</option>

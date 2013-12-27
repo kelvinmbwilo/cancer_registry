@@ -10,8 +10,8 @@ if(isset($_GET['page'])){
             <li class="active" id="registerpatient"><a href="#"><i class="fa fa-plus-circle fa-lg"></i> Registration <i class="fa fa-chevron-right pull-right"></i></a></li>
           <li><a href="#" id="listpat"><i class="fa fa-list fa-lg"></i> List Patients <i class="fa fa-chevron-right pull-right"></i></a></li>
           <!--    <li><a href="#" id="patiexamination"><i class="fa fa-medkit fa-lg"></i> Examination <i class="fa fa-chevron-right pull-right"></i></a></li>-->
-            <li><a href="#" id="followup"><i class="fa fa-link fa-lg"></i> Follow Up <i class="fa fa-chevron-right pull-right"></i></a></li>
-            <li><a href="#" id="encounter"><i class="fa fa-th fa-lg"></i> Encounter <i class="fa fa-chevron-right pull-right"></i></a></li>
+<!--            <li><a href="#" id="followup"><i class="fa fa-link fa-lg"></i> Follow Up <i class="fa fa-chevron-right pull-right"></i></a></li>
+            <li><a href="#" id="encounter"><i class="fa fa-th fa-lg"></i> Encounter <i class="fa fa-chevron-right pull-right"></i></a></li>-->
           </ul>
 <?php
     }
@@ -23,9 +23,9 @@ if(isset($_GET['page'])){
         ?>
         <ul class="nav nav-tabs nav-stacked">
             <li class="active" id="usermanagement"><a href="#"><i class="fa fa-user fa-lg"></i> User Management <i class="fa fa-chevron-right pull-right"></i></a></li>
-            <li><a href="#" id="managelocation"><i class="fa fa-location-arrow fa-lg"></i> Manage Location <i class="fa fa-chevron-right pull-right"></i></a></li>
+<!--            <li><a href="#" id="managelocation"><i class="fa fa-location-arrow fa-lg"></i> Manage Location <i class="fa fa-chevron-right pull-right"></i></a></li>
             <li><a href="#" id="manageoccu"><i class="fa fa-home fa-lg"></i> Manage Occupation <i class="fa fa-chevron-right pull-right"></i></a></li>
-            <li><a href="#" id="reportstype"><i class="fa fa-file-text fa-lg"></i> Report Type <i class="fa fa-chevron-right pull-right"></i></a></li>
+            <li><a href="#" id="reportstype"><i class="fa fa-file-text fa-lg"></i> Report Type <i class="fa fa-chevron-right pull-right"></i></a></li>-->
           </ul>
 <?php
     }
@@ -38,7 +38,7 @@ if(isset($_GET['page'])){
         <ul class="nav nav-tabs">
             <li class="active" id="addUser"><a href="#"><i class="fa fa-plus-circle fa-lg"></i> Add User</a></li>
             <li><a href="#" id="listuser"><i class="fa fa-list fa-lg"></i> List User</a></li>
-            <li><a href="#" id="searchuser"><i class="fa fa-search fa-lg"></i> Search User</a></li>
+            <!--<li><a href="#" id="searchuser"><i class="fa fa-search fa-lg"></i> Search User</a></li>-->
           </ul>
     <?php
     }

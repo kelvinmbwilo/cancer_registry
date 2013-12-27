@@ -19,6 +19,14 @@ $(document).ready(function(){
              $("#submenus").html("");
              $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
              $("#maincontents").load("includes/forms.php?page=userRegistration",function(){
+                 $("#region").change(function(){
+            var regi = $(this).val();
+            $("#districtarea").html("<i class='fa fa-spinner fa-spin'></i>");
+            $("#districtarea").load("statistics/region.php?page=district",{reg:regi},function(){
+            });
+
+            });
+                 $("form").validationEngine(); 
                  $("#Birth_Date").datepicker({
                     changeMonth: true,
                     changeYear: true,
@@ -26,6 +34,7 @@ $(document).ready(function(){
                     dateFormat:"yy-mm-dd"
                 });
                  $("#submitbtn").click(function(){
+                 if($("form").validationEngine('validate')){
                  var id =  $("#Patient_id").val(),fname=$("#First_Name").val(),mname=$("#Middle_Name").val(),lname=$("#Last_Name").val(),sex=$("#gender").val();
                  var dob =$("#Birth_Date").val(),tribe=$("#tribe").val(),Occupation = $("#Occupation").val(),country=$("#nationality").val(),region=$("#region").val();
                  var district = $("#district").val(),ward=$("#ward").val(),vill = $("#village").val(),ten =$("#Cell_leader").val(),phon=$("#phone_number").val();
@@ -143,7 +152,6 @@ $(document).ready(function(){
                                ///////////////////Diagnosis Registration ///////////////////////////
                                ////////////////////////////////////////////////////////////////
                                success: function(data){
-                                   alert(data);
                                     $("#loader").remove();
                                     $("#maincontents").html("<img src='img/loading.gif' />Tumor Record added Successfull Loading Examination form...");
                                     $("#maincontents").load("includes/forms.php?page=Examination",{id:id},function(){
@@ -185,10 +193,10 @@ $(document).ready(function(){
                                            }, 
                                            cache: false,
                                            success: function(){
-                                               $("#maincontents").load("includes/form_processor.php?page=patientinfo",{id:id},function(){
-                                                   $("#loader").remove();
-                                               });
-                                                
+                                               $("#maincontents").html("<h3>Patient Successfull Registred,</h3><p></p>");
+                                                setTimeout(function(){
+                                                    $("#listpat").trigger("click");
+                                                  }, 5000); 
                                                 
                                            }
 
@@ -202,6 +210,7 @@ $(document).ready(function(){
                         });
                     }
                     });
+                 }
                 });//end of adding patient
              });
          });
@@ -214,6 +223,8 @@ $(document).ready(function(){
              $("#maincontents").html("<img src='img/loading.gif' /> Loading Patient List Please Wait...");
              $("#maincontents").load("includes/processes.php?page=list_patient",function(){
                  $("#myTable").dataTable({
+                     "bJQueryUI": true,
+                     "sPaginationType": "full_numbers",
                     "fnDrawCallback": function( oSettings ) {
                        // alert( 'DataTables has redrawn the table' );
                       
@@ -268,75 +279,53 @@ $(document).ready(function(){
                             });
                         });//end of editing basic info
                        
-                        $(".edittumor").click(function(){
-                            var tid = $(this).attr("id");
-                            $("#maincontents").html("<img src='img/loading.gif' /> Loading Patient Tumor Information Please Wait...");
-                            $("#maincontents").load("includes/form_processor.php?page=edittumorinfo",{id:tid},function(){
-                                $("#Incidence_Date").datepicker({
-                                    changeMonth: true,
-                                    changeYear: true,
-                                    dateFormat:"yy-mm-dd"
-                                });
-                                $("#submitbtn").click(function(){
-                                var topo = $("#Topography").val(),morp=$("#Morphology").val(),beh=$("#Behavior").val(),inc=$("#Incidence_Date").val(),base=$("#Basis_Diagnosis").val();
-                                var icd=$("#ICD_10").val(),icc=$("#ICCC_code").val(),hosptal=$("#Hospital").val(),path_lab_no=$("#Path_lab_no").val(),unit=$("#Unit").val(),case_no=$("#Case_no").val();
-                                $("#maincontents").html("<span id='loader'><img src='img/loading.gif' /> Submitting Patient tumor Information Please Wait ...</span>");    
-                                $.ajax({
-                                   type: "POST",
-                                   url: "includes/form_processor.php?page=edittumorinfo1",
-                                   data: {
-                                       id:tid,
-                                       topograph : topo,
-                                       morphology:morp,
-                                       behavior:beh,
-                                       incidance_date:inc,
-                                       basis_diagnosis:base,
-                                       ICD_10:icd,
-                                       ICCC_code:icc,
-                                       hosptal:hosptal,
-                                       path_lab_no:path_lab_no,
-                                       unit:unit,
-                                       case_no:case_no
-                                       
-                                   }, 
-                                   cache: false,
-
-                                   ////////////////////////////////////////////////////////////////
-                                   ///////////////////Diagnosis Registration ///////////////////////////
-                                   ////////////////////////////////////////////////////////////////
-                                   success: function(msg){
-                                      $("#listpat").trigger("click");
-                                   }
-                                });
+                          $(".edittumor").click(function(){
+                            $(".edittumor").show("slow").parent().parent().find("span").remove();
+                            var btn = $(this).parent().parent();
+                            $(this).hide("slow").parent().append("<span><br>Are You Sure <br /> <a href='#s' id='yes'><i class='fa fa-check'></i> Yes</a> <a href='#s' id='no'> <i class='fa fa-times'></i> No</a></span>");
+                            $("#no").click(function(){
+                                $(this).parent().parent().find(".edittumor").show("slow");
+                                $(this).parent().parent().find("span").remove();
+                            });
+                            $("#yes").click(function(){
+                                $(this).parent().html("<br><i class='fa fa-spinner fa-spin'></i>deleting...");
+                                $.post("includes/form_processor.php?page=deletetumor",{id:id1},function(data){
+                                  btn.hide("slow").next("hr").hide("slow");
                                });
-                            })
-                        });//end of editing tumor
+                            });
+                        });//endof editing tumor
                     
                         $(".editExam").click(function(){
                             var id1 = $(this).attr("id");
-                            $("#maincontents").html("<img src='img/loading.gif' /> Loading Patient Information Please Wait...");
-                            $("#maincontents").load("includes/form_processor.php?page=editexaminfo",{id:id1},function(){
-                                $("#submitbtn").click(function(){
-                                    var bio = $("#Biops_Number").val(), coll=$("#Biops_collected").val(), exam=$("#Examination_Details").val();
-                                    var gis=$("#Treatment_Details").val(); 
-                                    $("#maincontents").html("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait To Add Examination Record...</span>");    
-                                    $("form").hide();
-                                       $.ajax({
-                                       type: "POST",
-                                       url: "includes/form_processor.php?page=editexaminfo1",
-                                       data: {
-                                           biopsy_number : bio,
-                                           collected_from:coll,
-                                           details:exam,
-                                           gis_details:gis
-                                       }, 
-                                       cache: false,
-                                       success: function(){
-                                            $("#listpat").trigger("click");
-                                       }
-
-                                    });     
-                                });//end of adding examination
+                            $(".editExam").show("slow").parent().parent().find("span").remove();
+                            var btn = $(this).parent().parent();
+                            $(this).hide("slow").parent().append("<span><br>Are You Sure <br /> <a href='#s' id='yes'><i class='fa fa-check'></i> Yes</a> <a href='#s' id='no'> <i class='fa fa-times'></i> No</a></span>");
+                            $("#no").click(function(){
+                                $(this).parent().parent().find(".editExam").show("slow");
+                                $(this).parent().parent().find("span").remove();
+                            });
+                            $("#yes").click(function(){
+                                $(this).parent().html("<br><i class='fa fa-spinner fa-spin'></i>deleting...");
+                                $.post("includes/form_processor.php?page=deleteexam",{id:id1},function(data){
+                                  btn.hide("slow").next("hr").hide("slow");
+                               });
+                            });
+                        });//endof editing examination
+                    
+                       $(".editfollow").click(function(){
+                            var id1 = $(this).attr("id");
+                            $(".editfollow").show("slow").parent().parent().find("span").remove();
+                            var btn = $(this).parent().parent();
+                            $(this).hide("slow").parent().append("<span><br>Are You Sure <br /> <a href='#s' id='yes'><i class='fa fa-check'></i> Yes</a> <a href='#s' id='no'> <i class='fa fa-times'></i> No</a></span>");
+                            $("#no").click(function(){
+                                $(this).parent().parent().find(".editfollow").show("slow");
+                                $(this).parent().parent().find("span").remove();
+                            });
+                            $("#yes").click(function(){
+                                $(this).parent().html("<br><i class='fa fa-spinner fa-spin'></i>deleting...");
+                                $.post("includes/form_processor.php?page=deletefollow",{id:id1},function(data){
+                                  btn.hide("slow").next("hr").hide("slow");
+                               });
                             });
                         });//endof editing examination
                     
@@ -344,13 +333,19 @@ $(document).ready(function(){
                             var id1 = $(this).attr("id");
                             $("#maincontents").html("<img src='img/loading.gif' /> Loading Form To Add Tumor Record Please Wait...");
                             $("#maincontents").load("includes/forms.php?page=Tumor",{id:id1},function(){
-                                 $("#Incidence_Date").datepicker({
+                                $("#Morphology").change(function(){
+                                var morp = $(this).val();
+                                $("#behaviorarea").html("<i class='fa fa-spinner fa-spin'></i>");
+                                $("#behaviorarea").load("includes/form_processor.php?page=behavior",{morp:morp},function(){
+                                });
+                                });
+                                $("#Incidence_Date").datepicker({
                                     changeMonth: true,
                                     changeYear: true,
                                     dateFormat:"yy-mm-dd"
                                 });
                                 $("#submitbtn1").click(function(){
-                                    var topo = $("#Topography").val(),morp=$("#Morphology").val(),beh=$("#Behavior").val(),inc=$("#Incidence_Date").val(),base=$("#Basis_Diagnosis").val();
+                                    var topo = $("#Topography").val(),morp=$("#Morphology").val(),beh=$("#Behevior").val(),inc=$("#Incidence_Date").val(),base=$("#Basis_Diagnosis").val();
                                     var icd=$("#ICD_10").val(),icc=$("#ICCC_code").val(),hosptal=$("#Hospital").val(),path_lab_no=$("#Path_lab_no").val(),unit=$("#Unit").val(),case_no=$("#Case_no").val();
                                     $("#submit").hide("slow");$("#submit1").hide("slow");
                                     $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait To Add Another Tumor Record...</span>");    
@@ -366,7 +361,7 @@ $(document).ready(function(){
                                             patient_id : id1,
                                             topograph : topo,
                                             morphology:morp,
-                                            behavior:beh,
+                                            behavior:$("#Behevior").val(),
                                             incidance_date:inc,
                                             basis_diagnosis:base,
                                             ICD_10:icd,
@@ -388,7 +383,7 @@ $(document).ready(function(){
                                 });//end of adding tumor
 
                                     $("#submitbtn").click(function(){
-                                    var topo = $("#Topography").val(),morp=$("#Morphology").val(),beh=$("#Behavior").val(),inc=$("#Incidence_Date").val(),base=$("#Basis_Diagnosis").val();
+                                    var topo = $("#Topography").val(),morp=$("#Morphology").val(),inc=$("#Incidence_Date").val(),base=$("#Basis_Diagnosis").val();
                                     var icd=$("#ICD_10").val(),icc=$("#ICCC_code").val(),hosptal=$("#Hospital").val(),path_lab_no=$("#Path_lab_no").val(),unit=$("#Unit").val(),case_no=$("#Case_no").val();
                                     $("#submit").hide("slow");$("#submit1").hide("slow");
                                     $("#maincontents").append("<span id='loader'><img src='img/loading.gif' /> Submitting Patient Information Please Wait To Add Another Tumor Record...</span>");    
@@ -404,7 +399,7 @@ $(document).ready(function(){
                                             patient_id : id1,
                                             topograph : topo,
                                             morphology:morp,
-                                            behavior:beh,
+                                            behavior:$("#Behevior").val(),
                                             incidance_date:inc,
                                             basis_diagnosis:base,
                                             ICD_10:icd,
@@ -487,6 +482,13 @@ $(document).ready(function(){
                                    dateFormat:"yy-mm-dd"
                                });
                            
+                           $("#status").change(function(){
+                               if($(this).val() === "Dead"){
+                                   $("#deathcause").show("slow");
+                               }else{
+                                  $("#deathcause").hide("slow");
+                               }
+                            });
                             $("#followbtn").click(function(){
                                     var lastc = $("#last_date").val(), status=$("#status").val(), deathca=$("#deathcause").val();
                                     var drname=$("#drname").val(); 
@@ -524,9 +526,7 @@ $(document).ready(function(){
                 });
                 $("#yes").click(function(){
                     $(this).parent().html("<br><i class='fa fa-spinner fa-spin'></i>deleting...");
-                    alert(id);
                     $.post("includes/form_processor.php?page=deletepat",{id:id},function(data){
-                      alert(data);
                       btn.hide("slow").next("hr").hide("slow");
                    });
                 });

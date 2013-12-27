@@ -50,7 +50,7 @@ if(isset($_GET['page'])){
     if($_GET['page'] == "list_patient"){
         $query = mysql_query("SELECT * FROM patient");
         ?>
-<table id="myTable" class="display tablesorter table-bordered"> 
+<table id="myTable" class="display tablesorter table table-bordered col-md-11"> 
 <thead> 
 <tr> 
     <th>Patient_id</th>
@@ -74,7 +74,7 @@ if(isset($_GET['page'])){
     <td><?php echo $row['gender'] ?></td>
     <td><?php echo $row['date_of_birth'] ?></td> 
     <td>
-        <a href="#s" id="<?php echo $row['id'] ?>" class="moreinfo btn btn-primary btn-xs" title="View More Details"><i class="fa fa-info"></i> Info</a>
+        <a href="#s" id="<?php echo $row['id'] ?>" class="moreinfo btn btn-primary btn-xs" title="View More Details" style="margin-right: 5px"><i class="fa fa-info"></i> Info</a>
         <a href="#a" id="<?php echo $row['id'] ?>" class="deletepat text-danger btn btn-danger btn-xs" title="Delete Patient"><i class="fa fa-trash-o"></i> </a>
     </td>  
 </tr> 

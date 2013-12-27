@@ -32,7 +32,7 @@ if(isset($_GET['page'])){
   <div class="form-group">
     <label for="Middle_Name" class="col-md-2 control-label">Middle Name</label>
     <div class="col-md-4">
-      <input type="text" name="Middle_Name" id="Middle_Name" class="form-control validate[required]"  placeholder="Middle Name">
+      <input type="text" name="Middle_Name" id="Middle_Name" class="form-control"  placeholder="Middle Name">
     </div>
   </div>
     
@@ -64,7 +64,7 @@ if(isset($_GET['page'])){
    <div class="form-group">
     <label for="phone_number" class="col-md-2 control-label">Phone Number</label>
     <div class="col-md-4">
-      <input type="text" name="phone_number" id="phone_number" class="form-control validate[required]"  placeholder="Phone Number">
+      <input type="text" name="phone_number" id="phone_number" class="form-control"  placeholder="Phone Number">
     </div>
   </div>
  <!--Occupation-->
@@ -89,7 +89,7 @@ if(isset($_GET['page'])){
  <div class="form-group">
     <label for="Cell_leader" class="col-md-2 control-label">Name of Ten cell Leader</label>
     <div class="col-md-4">
-      <input type="text" name="Cell_leader" id="Cell_leader" class="form-control validate[required]"  placeholder="Name of Ten cell Leader">
+      <input type="text" name="Cell_leader" id="Cell_leader" class="form-control"  placeholder="Name of Ten cell Leader">
     </div>
   </div>
  <hr />
@@ -100,19 +100,19 @@ if(isset($_GET['page'])){
         <?php echo form::countryList(); ?>
     </div>
     <div class="col-md-2">
-        <?php echo form::regionalDropWithDefault(); ?>
+        <?php echo form::regionalDropWithDefault1(); ?>
+    </div>
+     
+     <div class="col-md-2" id="districtarea">
+        <?php echo form::districtDropdown1("all"); ?>
     </div>
      
      <div class="col-md-2">
-        <?php echo form::districtDropdown("all"); ?>
+        ward:<input type="text" name="ward" id="ward" class="form-control"  placeholder="Ward">
     </div>
      
      <div class="col-md-2">
-        ward:<input type="text" name="ward" id="ward" class="form-control validate[required]"  placeholder="Ward">
-    </div>
-     
-     <div class="col-md-2">
-       Village <input type="text" name="village" id="village" class="form-control validate[required]"  placeholder="Village">
+       Village <input type="text" name="village" id="village" class="form-control"  placeholder="Village">
     </div>
      
   </div>
@@ -498,7 +498,7 @@ if(isset($_GET['page'])){
   <div class="form-group">
     <label for="Middle_Name" class="col-md-2 control-label">Middle Name</label>
     <div class="col-md-4">
-      <input type="text" name="Middle_Name" id="Middle_Name" class="form-control validate[required]"  placeholder="Middle Name">
+      <input type="text" name="Middle_Name" id="Middle_Name" class="form-control"  placeholder="Middle Name">
     </div>
   </div>
     
@@ -531,7 +531,7 @@ if(isset($_GET['page'])){
   <div class="form-group">
     <label for="Email" class="col-md-2 control-label" >Email</label>
     <div class="col-md-4">
-      <input type="text" name="Email" id="Email" class="form-control validate[required]"  placeholder="Email">
+      <input type="text" name="Email" id="Email" class="form-control validate[required,custom[email]]"  placeholder="Email">
     </div>
   </div>
  
@@ -540,6 +540,22 @@ if(isset($_GET['page'])){
     <label for="Phone_Number" class="col-md-2 control-label">Phone Number</label>
     <div class="col-md-4">
       <input type="text" name="Phone_Number" id="Phone_Number" class="form-control validate[required]"  placeholder="Phone Number">
+    </div>
+  </div>
+    
+  <!--Phone Number-->
+  <div class="form-group">
+    <label for="Password" class="col-md-2 control-label">Password</label>
+    <div class="col-md-4">
+        <input type="password" name="Password" id="Password" class="form-control validate[required]"  placeholder="Password">
+    </div>
+  </div>
+    
+  <!--Phone Number-->
+  <div class="form-group">
+    <label for="Repassword" class="col-md-2 control-label">Password Again</label>
+    <div class="col-md-4">
+        <input type="password" name="Repassword" id="Repassword" class="form-control validate[required]"  placeholder="Password Again">
     </div>
   </div>
     

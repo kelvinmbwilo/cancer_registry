@@ -259,7 +259,7 @@ class patient {
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<?php echo $count ?>">
           <strong>Tumor Record #<?php echo $count ?> <i class="fa fa-angle-double-down fa-lg pull-left"></i></strong>
-      </a><button class="btn btn-xs edittumor" id="<?php echo $row['id'] ?>"><i class="fa fa-pencil"></i></button>
+      </a><button class="btn btn-xs edittumor" id="<?php echo $row['id'] ?>"><i class="fa fa-trash-o"></i></button>
     </div>
     <div id="collapse<?php echo $count ?>" class="accordion-body collapse">
       <div class="accordion-inner">
@@ -284,7 +284,7 @@ class patient {
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collaps<?php echo $count ?>">
           <strong>Examination Record #<?php echo $count ?>  <i class="fa fa-angle-double-down fa-lg pull-left"></i></strong>
-      </a><button class="btn btn-xs editExam" id="<?php echo $row1['biopsy_number'] ?>"><i class="fa fa-pencil"></i></button>
+      </a><button class="btn btn-xs editExam" id="<?php echo $row1['biopsy_number'] ?>"><i class="fa fa-trash-o"></i></button>
     </div>
     <div id="collaps<?php echo $count ?>" class="accordion-body collapse">
       <div class="accordion-inner">
@@ -332,7 +332,7 @@ echo "<hr>";
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion4" href="#collapsee<?php echo $count ?>">
           <strong>Follow Up Record #<?php echo $count ?>  <i class="fa fa-angle-double-down fa-lg pull-left"></i></strong>
-      </a><button class="btn btn-xs editExam" id="<?php echo $row1['id'] ?>"><i class="fa fa-pencil"></i></button>
+      </a><button class="btn btn-xs editfollow" id="<?php echo $row1['id'] ?>"><i class="fa fa-trash-o"></i></button>
     </div>
     <div id="collapsee<?php echo $count ?>" class="accordion-body collapse">
       <div class="accordion-inner">

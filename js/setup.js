@@ -19,9 +19,14 @@ $(document).ready(function(){
                     $("#addUser").click(function(){
                         $("#maincontents").html("<img src='img/loading.gif' /> Loading form...");
                         $("#maincontents").load("includes/forms.php?page=addUser",function(){
+                            $("form").validationEngine(); 
                             $("#submitbtn").click(function(){
+                                if($("#Password").val() !== $("#Repassword").val()){
+                                    alert("two password do not match")
+                                }else{
+                                
                                 var fname=$("#First_Name").val(),mname=$("#Middle_Name").val(),lname=$("#Last_Name").val(),sex=$("#gender").val();
-                                var level =$("#role").val(),phone=$("#Phone_Number").val(),email = $("#Email").val();
+                                var level =$("#role").val(),phone=$("#Phone_Number").val(),email = $("#Email").val(),pass = $("#Password").val();
                                 $("#maincontents").html("<img src='img/loading.gif' /> Submitting User Information Please Wait...");    
                                 $.ajax({
                                    type: "POST",
@@ -33,7 +38,8 @@ $(document).ready(function(){
                                        gender:sex,
                                        email:email,
                                        phone:phone,
-                                       level:level
+                                       level:level,
+                                       pass:pass
                                    }, 
                                    cache: false,
 
@@ -41,9 +47,10 @@ $(document).ready(function(){
                                    ///////////////////tumor Registration ///////////////////////////
                                    ////////////////////////////////////////////////////////////////
                                    success: function(msg){
-                                       alert(msg);
+                                       $("#listuser").trigger("click");
                                    }
-                                });      
+                                });   
+                                }
                             });
                         });
                     });

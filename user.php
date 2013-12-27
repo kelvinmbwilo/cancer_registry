@@ -1,3 +1,10 @@
+<?php 
+session_start();
+if(!isset($_SESSION['fname'])){
+   header("location:index.php");
+}
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
